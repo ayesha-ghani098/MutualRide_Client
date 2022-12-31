@@ -8,6 +8,7 @@ const ConnectWallet = () => {
   const web3 =  useSelector((state)=>state.web3);
   let navigate = useNavigate();
   let dispatch = useDispatch()
+  console.log(web3)
   const handleClick = () => {
     
     dispatch(connectWeb3())

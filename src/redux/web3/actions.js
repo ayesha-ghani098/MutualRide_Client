@@ -1,6 +1,6 @@
 import ridesharingAbi from "../../contractAbis/ridesharing.json"
-// import riderAbi from "../../contractAbis/rider.json"
-// import driverAbi from "../../contractAbis/driver.json"
+import riderAbi from "../../contractAbis/rider.json"
+import driverAbi from "../../contractAbis/driver.json"
 
 
 import web3 from "../../utils/web3";
@@ -29,22 +29,19 @@ const connectSuccess = (payload) => {
       dispatch(connectRequest());
    try{
     const walletAddress= await web3.eth.requestAccounts();
-    const RScontract=new web3.eth.Contract(ridesharingAbi,'0xc277559800784cB3C10c9C8de5F30d8aEc4EbB20');
+    const RScontract=new web3.eth.Contract(ridesharingAbi,'0xB9ee544e7fcc11c5aa5BBa215f549d867E5CcD1b');
     console.log(walletAddress,RScontract)
     let wallet={address: walletAddress[0]}
-    let Ridercontract=null
-    let driverContract=null
-    let addressString=""
+    let Ridercontract=new web3.eth.Contract(riderAbi,'0xEbBeBB565692c8A1F096643c9bc1cDf390Aebb1D');
     
-    const tx= await RScontract.methods.registerForDriver(1,"a","","","","","").send({
-      from: walletAddress[0],
-    });
-    console.log(tx);
+    let driverContract=new web3.eth.Contract(driverAbi,'0x1819Cc2E17776dA93c1A84B8463874CaeA21DfFB');
     
-    // let addressString = `${wallet.account.slice(0, 5)}...${wallet.account.slice(
+    let addressString = null
+    //  let addressString = `${wallet.account.slice(0, 5)}...${walconsoconsole.log(walletAddress,RScontract)le.log(walletAddress,RScontract)let.account.slice(
     //   wallet.account.length - 4,
     //   wallet.account.length
     // )}`;
+
     dispatch(
       connectSuccess({  
         wallet,
@@ -60,3 +57,46 @@ const connectSuccess = (payload) => {
     }
   }
   }
+
+
+const registerDriverSuccess=(payload)=>{
+  return {
+    type: "DRIVER_SUCCESS",
+    payload: payload,
+  };
+}
+
+export const registerDriver=(contract,address,data)=>{
+  return async (dispatch) => {
+   try{
+    console.log(contract,address,data)
+   // data = {name:"asd",nic:"dad",email:"dasd",phoneno:"",regNo:"",model:"asd",licenceNo:""}
+      const tx = await contract.methods.registerForDriver(data.name,data.cnic,data.email,data.phoneno,data.regno, data.model,data.licenceNo).send({from:address});
+      console.log(tx)
+      console.log(tx.events.registered.returnValues.driverId);
+      dispatch(registerDriverSuccess({driverId:tx.events.registered.returnValues.driverId}))
+   }catch(err){
+       console.log(err)
+   }
+}
+}
+const registerRiderSuccess=(payload)=>{
+  return {
+    type: "RIDER_SUCCESS",
+    payload: payload,
+  };
+}
+export const registerRider=(contract,address,data)=>{
+  return async (dispatch) => {
+   try{
+    console.log(contract,address,data)
+   // data = {name:"asd",nic:"dad",email:"dasd",phoneno:"",regNo:"",model:"asd",licenceNo:""}
+      const tx = await contract.methods.registerForRider(data.name,data.email,data.phoneno).send({from:address});
+      console.log(tx)
+      console.log(tx.events.registered.returnValues.driverId);
+      dispatch(registerRiderSuccess({RiderId:tx.events.registered.returnValues.driverId}))
+   }catch(err){
+       console.log(err)
+   }
+}
+}

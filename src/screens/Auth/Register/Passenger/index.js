@@ -1,21 +1,24 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { registerRider } from "../../../../redux/web3/actions";
 
 const RegisterPassenger = () => {
+  const web3 =  useSelector((state)=>state.web3);
+ const dispatch = useDispatch()
   const initState = {
     name: "",
     email: "",
-    cnic: "",
     phoneno: "",
     termsAndConditions: false,
   };
 
   // eslint-disable-next-line no-unused-vars
   const [initialValues, setInitialValues] = React.useState(initState);
-
   const onSubmit = (values, event) => {
     console.log("Values:::", values);
+    dispatch(registerRider(web3.rideSharingContractObj,web3.wallet.address,values));
 
     event.target.reset();
   };
@@ -57,14 +60,7 @@ const RegisterPassenger = () => {
         />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="Cnic">
-        <Form.Label>CNIC</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter cnic"
-          {...register("cnic", { required: "Cnic is required" })}
-        />
-      </Form.Group>
+   
 
       <Form.Group className="mb-3" controlId="Phoneno">
         <Form.Label>Phone No</Form.Label>
