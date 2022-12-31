@@ -1,0 +1,15 @@
+let web3;
+      const connection = await connector.connect()
+      let provider=new Web3.providers.HttpProvider(
+        'https://eth-goerli.g.alchemy.com/v2/7R-Kjv7qdzXJ4wRJSwFWvcfrqCXbzd6Z'
+    )
+    web3=new Web3(provider)
+    let RScontract= new web3.eth.Contract(ridesharingAbi.abi,'0xE0aF9268eA62F737B8721c527d8A3cAC7F73DF7e');
+    const wallet={
+      account: connection.accounts[0],
+      
+    }
+
+    const tx = await RScontract.methods.registerForDriver(1,'as','00','email','cellNo','regNum','modelName','rsObject').send({
+      from: wallet.account,
+    });

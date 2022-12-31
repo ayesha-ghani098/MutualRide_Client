@@ -6,10 +6,13 @@ import { RouterProvider } from "react-router-dom";
 import { authRouter } from "./route/AuthRoutes";
 import { appRouter } from "./route/AppRoutes";
 
+// Components
+import Sidebar from "./components/Sidebar";
+import web3Ins from "./utils/web3";
 
 // Temporary
-const web3 = true;
-const user = true;
+const web3 = false;
+const user = false;
 
 const App = () => {
   const router = appRouter();
