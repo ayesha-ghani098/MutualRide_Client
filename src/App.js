@@ -6,8 +6,6 @@ import { RouterProvider } from "react-router-dom";
 import { authRouter } from "./route/AuthRoutes";
 import { appRouter } from "./route/AppRoutes";
 
-// Components
-import Sidebar from "./components/Sidebar";
 
 // Temporary
 const web3 = true;
