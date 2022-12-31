@@ -8,10 +8,15 @@ const initialState = {
     rideSharingContractObj: null,
     riderContractObj :null,
     driverContractObj:null,
+    isDriver:false,
+    driverId:null,
+    isRider:false,
+    riderId:null
 }
 
 const web3Reducer = (state = initialState, action) => {
     switch (action.type) {
+
         case "CONNECTION_REQUEST":
             console.log("connecting...");
             return {
@@ -32,6 +37,16 @@ const web3Reducer = (state = initialState, action) => {
                 loading: false,
                 addressString: action.payload.addressString,
             };
+            case "DRIVER_SUCCESS":
+                return{
+                    driverId:action.payload.driverId,
+                    isDriver:true
+                }
+                case "RIDER_SUCCESS":
+                    return{
+                        riderId:action.payload.RiderId,
+                        isRider:true
+                    }
         case "CONNECTION_FAILED":
             console.log("connection failed...");
             return {
