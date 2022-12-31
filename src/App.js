@@ -10,8 +10,8 @@ import { appRouter } from "./route/AppRoutes";
 import Sidebar from "./components/Sidebar";
 
 // Temporary
-const web3 = false;
-const user = false;
+const web3 = true;
+const user = true;
 
 const App = () => {
   const router = appRouter();
@@ -23,10 +23,7 @@ const App = () => {
     </>
   ) : (
     <>
-      <Sidebar />
-      <Container className="app-container">
-        <RouterProvider router={router} />
-      </Container>
+      <RouterProvider router={router} />
     </>
   );
 };

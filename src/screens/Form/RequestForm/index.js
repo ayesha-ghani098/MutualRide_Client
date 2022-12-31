@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import Sidebar from "../../../components/Sidebar";
 
 const RequestRide = () => {
   return (
-    <div>RequestRide</div>
-  )
-}
+    <>
+      <Sidebar />
+      <div>Request a Ride Form</div>
+    </>
+  );
+};
 
-export default RequestRide
+export default RequestRide;
