@@ -153,13 +153,33 @@
     "inputs": [
       {
         "internalType": "string",
-        "name": "startPoint",
+        "name": "sourceLong",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "destination",
+        "name": "sourceLat",
         "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "destLong",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "destLat",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "startTime",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "seats",
+        "type": "uint256"
       }
     ],
     "name": "createRide",
@@ -241,6 +261,25 @@
         "internalType": "struct RideSharing.Rider[]",
         "name": "",
         "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "getUserType",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -334,12 +373,32 @@
       },
       {
         "internalType": "string",
-        "name": "startPoint",
+        "name": "StartTime",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "seats",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "sourceLong",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "destination",
+        "name": "sourceLat",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "destLong",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "destLat",
         "type": "string"
       }
     ],

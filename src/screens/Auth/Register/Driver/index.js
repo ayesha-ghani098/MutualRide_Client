@@ -19,7 +19,16 @@ const RegisterDriver = () => {
   };
  console.log(web3)
   // eslint-disable-next-line no-unused-vars
-  const [initialValues, setInitialValues] = useState(initState);
+  const [initialValues, setInitialValues] = useState({
+    name: "ASFAR",
+    email: "A@B.COM",
+    cnic: "122121212",
+    phoneno: "121212",
+    regno:"2121",
+    model: "SDSD",
+    licenceNo:'1223232'
+    
+  });
 
   const onSubmit = (values, event) => {
     console.log("Values::", values);

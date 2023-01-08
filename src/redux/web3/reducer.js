@@ -11,7 +11,8 @@ const initialState = {
     isDriver:false,
     driverId:null,
     isRider:false,
-    riderId:null
+    riderId:null,
+    user:false
 }
 
 const web3Reducer = (state = initialState, action) => {
@@ -36,6 +37,7 @@ const web3Reducer = (state = initialState, action) => {
                 connected: true,
                 loading: false,
                 addressString: action.payload.addressString,
+                user:true
             };
             case "DRIVER_SUCCESS":
                 return{
