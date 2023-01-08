@@ -8,13 +8,35 @@ import DriverHome from "../../screens/Home/Driver";
 import PassengerHome from "../../screens/Home/Passenger";
 import { AddRide, RequestRide } from "../../screens/Form";
 import MyRides from "../../screens/MyRides";
+import {
+  ConnectWallet,
+  RegisterDriver,
+  RegisterPassenger,
+  UserSelection,
+} from "../../screens/Auth";
 
-const user = true;
-const userType = "Passenger";
+let user = true;
 
-const driverRouter = createBrowserRouter([
+
+export const appRouter = createBrowserRouter([
   {
     path: "/",
+    element: <ConnectWallet />,
+  },
+  {
+    path: "user-selection",
+    element: <UserSelection />,
+  },
+  {
+    path: "register-driver",
+    element: <RegisterDriver />,
+  },
+  {
+    path: "register-passenger",
+    element: <RegisterPassenger />,
+  },
+  {
+    path: "/driver-home",
     element: (
       <Protected isSignedIn={user}>
         <DriverHome />
@@ -37,11 +59,8 @@ const driverRouter = createBrowserRouter([
       </Protected>
     ),
   },
-]);
-
-const passengerRouter = createBrowserRouter([
   {
-    path: "/",
+    path: "/passenger-home",
     element: (
       <Protected isSignedIn={user}>
         <PassengerHome />
@@ -66,10 +85,6 @@ const passengerRouter = createBrowserRouter([
   },
 ]);
 
-export const appRouter = () => {
-  if (userType === "Driver") {
-    return driverRouter;
-  } else {
-    return passengerRouter;
-  }
-};
+
+
+

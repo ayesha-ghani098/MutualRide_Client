@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 
 import Sidebar from "../../../components/Sidebar";
+import AddressPicker from "../../../components/AddressPicker";
 
 const AddRide = () => {
   const initState = {
@@ -44,6 +45,7 @@ const AddRide = () => {
     <>
       <Sidebar />
       <Form onSubmit={handleSubmit(onSubmit, onError)}>
+        <AddressPicker/>
         <Form.Group className="mb-3" controlId="AvailableSeats">
           <Form.Label>Available Seats</Form.Label>
           <Form.Control
