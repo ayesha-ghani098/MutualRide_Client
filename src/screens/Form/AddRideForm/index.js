@@ -51,7 +51,7 @@ const AddRide = () => {
     <>
       <Sidebar />
       <Form onSubmit={handleSubmit(onSubmit, onError)}>
-        <AddressPicker/>
+        {/* <AddressPicker/> */}
         <Form.Group className="mb-3" controlId="AvailableSeats">
           <Form.Label>Available Seats</Form.Label>
           <Form.Control
