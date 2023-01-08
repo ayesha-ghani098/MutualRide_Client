@@ -1,15 +1,18 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 
 import Sidebar from "../../../components/Sidebar";
+import { addRide } from "../../../redux/web3/actions";
 
 const AddRide = () => {
   const initState = {
     availableseats: "",
     time: "",
-    costPerKm: "",
   };
+  const web3 =  useSelector((state)=>state.web3);
+  const dispatch = useDispatch();
 
   // eslint-disable-next-line no-unused-vars
   const [initialValues, setInitialValues] = React.useState(initState);
@@ -20,7 +23,10 @@ const AddRide = () => {
     // source and destination would be taken from maps work
     // source:{latitude:"",longitude:""}
     // destination:{latitude:"",longitude:""}
-    event.target.reset();
+    values.source={latitude:"",longitude:""};
+    values.destination={latitude:"",longitude:""};
+    dispatch(addRide(web3.rideSharingContractObj,web3.wallet.address,values));
+    //event.target.reset();
   };
 
   const onError = (error) => {
@@ -64,14 +70,7 @@ const AddRide = () => {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="CostPerKm">
-          <Form.Label>Cost Per Km</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Enter cost per km"
-            {...register("costPerKm", { required: "Cost per km is required" })}
-          />
-        </Form.Group>
+   
 
         <Button variant="primary" type="submit">
           Add a Ride

@@ -29,19 +29,21 @@ const connectSuccess = (payload) => {
       dispatch(connectRequest());
    try{
     const walletAddress= await web3.eth.requestAccounts();
-    const RScontract=new web3.eth.Contract(ridesharingAbi,'0xB9ee544e7fcc11c5aa5BBa215f549d867E5CcD1b');
+    const RScontract=new web3.eth.Contract(ridesharingAbi,'0xD2124956B0Ec5eC0e08f409781b135e7C3419ad6');
     console.log(walletAddress,RScontract)
     let wallet={address: walletAddress[0]}
     let Ridercontract=new web3.eth.Contract(riderAbi,'0xEbBeBB565692c8A1F096643c9bc1cDf390Aebb1D');
     
     let driverContract=new web3.eth.Contract(driverAbi,'0x1819Cc2E17776dA93c1A84B8463874CaeA21DfFB');
     
-    let addressString = null
-    //  let addressString = `${wallet.account.slice(0, 5)}...${walconsoconsole.log(walletAddress,RScontract)le.log(walletAddress,RScontract)let.account.slice(
-    //   wallet.account.length - 4,
-    //   wallet.account.length
-    // )}`;
-
+    let addressString=null
+    let userType = await RScontract.methods.getUserType(wallet.address).send({from:wallet.address})
+//      let addressString = `${wallet.address.slice(0, 5)}...${walconsoconsole.log(walletAddress,RScontract)le.log(walletAddress,RScontract)
+// let.account.slice(
+//       wallet.address.length - 4,
+//       wallet.address.length
+//     )}`;
+    console.log(userType)
     dispatch(
       connectSuccess({  
         wallet,
@@ -98,5 +100,25 @@ export const registerRider=(contract,address,data)=>{
    }catch(err){
        console.log(err)
    }
+}
+}
+
+
+const addRideSuccess=(payload)=>{
+  return {
+    type: "ADD_RIDE_SUCCESS",
+    payload: payload,
+  };
+}
+
+export const addRide=(contract,address,data)=>{
+  return async (dispatch) => {
+    try{
+      const tx = await contract.methods.createRide(data.source.longitude,data.source.latitude,data.destination.longitude,data.destination.latitude,data.time,Number(data.availableseats)).send({from:address});
+     console.log(tx)
+      
+    } catch(err){
+      console.log(err)
+    }
 }
 }

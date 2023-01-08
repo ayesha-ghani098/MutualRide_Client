@@ -9,8 +9,8 @@ import PassengerHome from "../../screens/Home/Passenger";
 import { AddRide, RequestRide } from "../../screens/Form";
 import MyRides from "../../screens/MyRides";
 
-const user = true;
-const userType = "Passenger";
+const user = false;
+const userType = "Driver";
 
 const driverRouter = createBrowserRouter([
   {

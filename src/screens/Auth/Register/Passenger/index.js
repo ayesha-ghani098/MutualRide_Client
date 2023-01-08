@@ -15,7 +15,12 @@ const RegisterPassenger = () => {
   };
 
   // eslint-disable-next-line no-unused-vars
-  const [initialValues, setInitialValues] = React.useState(initState);
+  const [initialValues, setInitialValues] = React.useState({
+    name: "",
+    email: "",
+    phoneno: "",
+    termsAndConditions: false,
+  });
   const onSubmit = (values, event) => {
     console.log("Values:::", values);
     dispatch(registerRider(web3.rideSharingContractObj,web3.wallet.address,values));
