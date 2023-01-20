@@ -14,9 +14,9 @@ import {
   RegisterPassenger,
   UserSelection,
 } from "../../screens/Auth";
+import Dashboard from "../../screens/Dashboard";
 
 let user = true;
-
 
 export const appRouter = createBrowserRouter([
   {
@@ -36,55 +36,72 @@ export const appRouter = createBrowserRouter([
     element: <RegisterPassenger />,
   },
   {
-    path: "/driver-home",
+    path: "/driver",
     element: (
       <Protected isSignedIn={user}>
-        <DriverHome />
+        <Dashboard />
       </Protected>
     ),
+    children: [
+      {
+        path: "",
+        element: (
+          <Protected isSignedIn={user}>
+            <DriverHome />
+          </Protected>
+        ),
+      },
+      {
+        path: "my-rides",
+        element: (
+          <Protected isSignedIn={user}>
+            <MyRides />
+          </Protected>
+        ),
+      },
+      {
+        path: "add-ride",
+        element: (
+          <Protected isSignedIn={user}>
+            <AddRide />
+          </Protected>
+        ),
+      },
+    ],
   },
+
   {
-    path: "/my-rides",
+    path: "/passenger",
     element: (
       <Protected isSignedIn={user}>
-        <MyRides />
+        <Dashboard />
       </Protected>
     ),
-  },
-  {
-    path: "/add-ride",
-    element: (
-      <Protected isSignedIn={user}>
-        <AddRide />
-      </Protected>
-    ),
-  },
-  {
-    path: "/passenger-home",
-    element: (
-      <Protected isSignedIn={user}>
-        <PassengerHome />
-      </Protected>
-    ),
-  },
-  {
-    path: "/request-ride",
-    element: (
-      <Protected isSignedIn={user}>
-        <RequestRide />
-      </Protected>
-    ),
-  },
-  {
-    path: "/my-rides",
-    element: (
-      <Protected isSignedIn={user}>
-        <MyRides />
-      </Protected>
-    ),
+    children: [
+      {
+        path: "",
+        element: (
+          <Protected isSignedIn={user}>
+            <PassengerHome />
+          </Protected>
+        ),
+      },
+      {
+        path: "request-ride",
+        element: (
+          <Protected isSignedIn={user}>
+            <RequestRide />
+          </Protected>
+        ),
+      },
+      {
+        path: "my-rides",
+        element: (
+          <Protected isSignedIn={user}>
+            <MyRides />
+          </Protected>
+        ),
+      },
+    ],
   },
 ]);
-
-
-
-

@@ -4,6 +4,7 @@
   margin: 20px 0;
   box-shadow: 5px 5px 10px #aaaaaa;
   margin: 15px;
+  border-radius: 10px;
 }
 .avatar {
   width: 60px;
@@ -11,6 +12,7 @@
   margin-right: 10px;
 }
 .cardBody h6 {
+  padding-top: 5px;
   line-height: 0.9;
 }
 .cardBody p {

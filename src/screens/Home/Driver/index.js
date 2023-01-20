@@ -5,15 +5,16 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../../../components/Sidebar";
 import { TextButton } from "../../../components/Buttons";
 import RidesList from "../../../components/List/RidesList";
+import Layout from "../../../components/Container";
+import { Heading } from "../../../components/Text";
 
 import { mockDataRide } from "../../../utils/data";
-import Layout from "../../../components/Container";
 
 const DriverHome = () => {
   const navigate = useNavigate();
 
   const handleNavigation = () => {
-    navigate("/add-ride");
+    navigate("/driver/add-ride");
   };
 
   return (
@@ -21,7 +22,7 @@ const DriverHome = () => {
       <Sidebar />
       <Layout>
         <TextButton text="Add a Ride" onClick={handleNavigation} />
-        <div>Requests</div>
+        <Heading text="Requests" />
         <RidesList type="Rides" data={mockDataRide} />
       </Layout>
     </>

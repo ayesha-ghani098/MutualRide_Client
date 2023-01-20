@@ -3,17 +3,17 @@ import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
-import Sidebar from "../../../components/Sidebar";
 import AddressPicker from "../../../components/AddressPicker";
 import { addRide } from "../../../redux/web3/actions";
 import Layout from "../../../components/Container";
+import { Heading } from "../../../components/Text";
 
 const AddRide = () => {
   const initState = {
     availableseats: "",
     time: "",
   };
-  const web3 =  useSelector((state)=>state.web3);
+  const web3 = useSelector((state) => state.web3);
   const dispatch = useDispatch();
 
   // eslint-disable-next-line no-unused-vars
@@ -25,9 +25,9 @@ const AddRide = () => {
     // source and destination would be taken from maps work
     // source:{latitude:"",longitude:""}
     // destination:{latitude:"",longitude:""}
-    values.source={latitude:"",longitude:""};
-    values.destination={latitude:"",longitude:""};
-    dispatch(addRide(web3.rideSharingContractObj,web3.wallet.address,values));
+    values.source = { latitude: "", longitude: "" };
+    values.destination = { latitude: "", longitude: "" };
+    dispatch(addRide(web3.rideSharingContractObj, web3.wallet.address, values));
     //event.target.reset();
   };
 
@@ -49,9 +49,8 @@ const AddRide = () => {
   });
 
   return (
-    <>
-      <Sidebar />
-      <Layout>
+    <Layout>
+      <Heading text="Add a Ride" />
       <Form onSubmit={handleSubmit(onSubmit, onError)}>
         {/* <AddressPicker/> */}
         <Form.Group className="mb-3" controlId="AvailableSeats">
@@ -74,14 +73,11 @@ const AddRide = () => {
           />
         </Form.Group>
 
-   
-
         <Button variant="primary" type="submit">
           Add a Ride
         </Button>
       </Form>
-      </Layout>
-    </>
+    </Layout>
   );
 };
 

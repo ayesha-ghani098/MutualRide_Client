@@ -3,8 +3,8 @@ import { useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 
-import Sidebar from "../../../components/Sidebar";
 import Layout from "../../../components/Container";
+import { Heading } from "../../../components/Text";
 
 const RequestRide = (props) => {
   // will display these props in passenger request form below
@@ -47,8 +47,8 @@ const RequestRide = (props) => {
 
   return (
     <>
-      <Sidebar />
       <Layout>
+        <Heading text="Request a Ride" />
         <Form onSubmit={handleSubmit(onSubmit, onError)}>
           <Form.Group className="mb-3" controlId="RequiredSeats">
             <Form.Label>Required Seats</Form.Label>

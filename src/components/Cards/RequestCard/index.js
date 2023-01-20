@@ -24,7 +24,7 @@ const RideCard = (props) => {
   const handleNavigation = () => {
     console.log(id);
     navigate({
-      pathname: "/request-ride",
+      pathname: "/passenger/request-ride",
       search: createSearchParams({
         driverId: id,
       }).toString(),
@@ -39,7 +39,7 @@ const RideCard = (props) => {
         alt="user-avatar"
       />
       <div className={styles.cardBody}>
-        <h5>{name}</h5>
+        <h6>{name}</h6>
         <p>source: {source}</p>
         <p>destination: {destination}</p>
         <div className={styles.cardBottom}>

@@ -16,7 +16,7 @@ const RequestCard = (props) => {
 
   const handleDecline = () => {
     // send notification to passenger
-    navigate("/");
+    navigate("/passenger");
   };
 
   return (
