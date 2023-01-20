@@ -1,46 +1,63 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
+import { AiOutlineFieldTime } from "react-icons/ai";
 import { MdPeopleOutline } from "react-icons/md";
 
+import styles from "./RequestCard.module.css";
 import Avatar from "../../../assets/avatar.png";
 import { TextButton } from "../../Buttons";
 
-const RequestCard = (props) => {
-  const { name, image, source, destination, requiredSeats } = props.request;
+const RideCard = (props) => {
+  const {
+    id,
+    name,
+    image,
+    source,
+    destination,
+    time,
+    seatsAvailable,
+    costPerKm,
+    vehicleType,
+  } = props.request;
   const navigate = useNavigate();
 
-  const handleAccept = () => {
-    // navigate to tracking
-  };
-
-  const handleDecline = () => {
-    // send notification to passenger
-    navigate("/");
+  const handleNavigation = () => {
+    console.log(id);
+    navigate({
+      pathname: "/request-ride",
+      search: createSearchParams({
+        driverId: id,
+      }).toString(),
+    });
   };
 
   return (
-    <div className="ride-card mb-20">
+    <div className={styles.card}>
       <img
-        style={{ width: "40px", height: "40px" }}
+        className={styles.avatar}
         src={image ? image : Avatar}
         alt="user-avatar"
       />
-      <div className="card-body">
+      <div className={styles.cardBody}>
         <h5>{name}</h5>
         <p>source: {source}</p>
-        <p>destination: {destination} </p>
-        <div className="card-bottom">
+        <p>destination: {destination}</p>
+        <div className={styles.cardBottom}>
           <div>
-            <MdPeopleOutline /> {requiredSeats}
+            <AiOutlineFieldTime />
+            {time}
           </div>
+          <div>
+            <MdPeopleOutline /> {seatsAvailable}
+          </div>
+          <div>{vehicleType}</div>
+          <div>Cost/km: {costPerKm}</div>
         </div>
-        <div className="card-buttons">
-          <TextButton text="Accept" onClick={handleAccept} />
-          <TextButton text="Decline" onClick={handleDecline} />
-        </div>
+        <TextButton text="Request a Ride" onClick={handleNavigation} />
       </div>
     </div>
   );
 };
 
-export default RequestCard;
+export default RideCard;
+

@@ -1,0 +1,26 @@
+.card {
+  display: flex;
+  padding: 15px;
+  margin: 20px 0;
+  box-shadow: 5px 5px 10px #aaaaaa;
+  margin: 15px;
+}
+.avatar {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+}
+.cardBody h6 {
+  line-height: 0.9;
+}
+.cardBody p {
+  line-height: 0.5;
+}
+.cardBottom {
+  display: flex;
+  justify-content: space-around;
+}
+.cardBottom div {
+  margin-top: 0;
+  margin-bottom: 10px;
+}

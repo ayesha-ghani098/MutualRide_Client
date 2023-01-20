@@ -1,0 +1,27 @@
+.container {
+  background: #6190e8;
+  background: -webkit-linear-gradient(to right, #a7bfe8, #6190e8);
+  background: linear-gradient(to right, #a7bfe8, #6190e8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.centeredDiv {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.imgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.imgContainer img {
+  width: 90px;
+}
+

@@ -6,8 +6,8 @@ import Sidebar from "../../../components/Sidebar";
 import { TextButton } from "../../../components/Buttons";
 import RidesList from "../../../components/List/RidesList";
 
-import { mockDataRequest } from "../../../utils/data";
-
+import { mockDataRide } from "../../../utils/data";
+import Layout from "../../../components/Container";
 
 const DriverHome = () => {
   const navigate = useNavigate();
@@ -15,13 +15,15 @@ const DriverHome = () => {
   const handleNavigation = () => {
     navigate("/add-ride");
   };
-  
+
   return (
     <>
       <Sidebar />
-      <TextButton text="Add a Ride" onClick={handleNavigation} />
-      <div>Requests</div>
-      <RidesList type="Requests" data={mockDataRequest} />
+      <Layout>
+        <TextButton text="Add a Ride" onClick={handleNavigation} />
+        <div>Requests</div>
+        <RidesList type="Rides" data={mockDataRide} />
+      </Layout>
     </>
   );
 };

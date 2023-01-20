@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../../../components/Sidebar";
 import AddressPicker from "../../../components/AddressPicker";
 import { addRide } from "../../../redux/web3/actions";
+import Layout from "../../../components/Container";
 
 const AddRide = () => {
   const initState = {
@@ -50,6 +51,7 @@ const AddRide = () => {
   return (
     <>
       <Sidebar />
+      <Layout>
       <Form onSubmit={handleSubmit(onSubmit, onError)}>
         {/* <AddressPicker/> */}
         <Form.Group className="mb-3" controlId="AvailableSeats">
@@ -78,6 +80,7 @@ const AddRide = () => {
           Add a Ride
         </Button>
       </Form>
+      </Layout>
     </>
   );
 };

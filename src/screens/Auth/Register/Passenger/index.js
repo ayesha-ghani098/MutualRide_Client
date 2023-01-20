@@ -2,7 +2,9 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+
 import { registerRider } from "../../../../redux/web3/actions";
+import Layout from "../../../../components/Container";
 
 const RegisterPassenger = () => {
   const web3 =  useSelector((state)=>state.web3);
@@ -46,6 +48,7 @@ const RegisterPassenger = () => {
   });
 
   return (
+<Layout>
     <Form onSubmit={handleSubmit(onSubmit, onError)}>
       <Form.Group className="mb-3" controlId="Name">
         <Form.Label>Name</Form.Label>
@@ -87,6 +90,7 @@ const RegisterPassenger = () => {
         Register
       </Button>
     </Form>
+    </Layout>
   );
 };
 

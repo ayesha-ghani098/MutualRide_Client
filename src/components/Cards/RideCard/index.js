@@ -1,61 +1,47 @@
 import React from "react";
-import { createSearchParams, useNavigate } from "react-router-dom";
-import { AiOutlineFieldTime } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import { MdPeopleOutline } from "react-icons/md";
 
+import styles from "./RideCard.module.css"
 import Avatar from "../../../assets/avatar.png";
 import { TextButton } from "../../Buttons";
 
-const RideCard = (props) => {
-  const {
-    id,
-    name,
-    image,
-    source,
-    destination,
-    time,
-    seatsAvailable,
-    costPerKm,
-    vehicleType,
-  } = props.ride;
+const RequestCard = (props) => {
+  const { name, image, source, destination, requiredSeats } = props.ride;
   const navigate = useNavigate();
 
-  const handleNavigation = () => {
-    console.log(id);
-    navigate({
-      pathname: "/request-ride",
-      search: createSearchParams({
-        driverId: id,
-      }).toString(),
-    });
+  const handleAccept = () => {
+    // navigate to tracking
+  };
+
+  const handleDecline = () => {
+    // send notification to passenger
+    navigate("/");
   };
 
   return (
-    <div className="request-card mb-20">
+    <div className={styles.card}>
       <img
-        style={{ width: "40px", height: "40px" }}
+        className={styles.avatar}
         src={image ? image : Avatar}
         alt="user-avatar"
       />
-      <div className="card-body">
-        <h5>{name}</h5>
+      <div className={styles.cardBody}>
+        <h6>{name}</h6>
         <p>source: {source}</p>
-        <p>destination: {destination}</p>
-        <div className="card-bottom">
+        <p>destination: {destination} </p>
+        <div className={styles.cardBottom}>
           <div>
-            <AiOutlineFieldTime />
-            {time}
+            <MdPeopleOutline size={20} /> {requiredSeats}
           </div>
-          <div>
-            <MdPeopleOutline /> {seatsAvailable}
-          </div>
-          <div>{vehicleType}</div>
-          <div>Cost/km: {costPerKm}</div>
         </div>
-        <TextButton text="Request a Ride" onClick={handleNavigation} />
+        <div className={styles.buttonContainer}>
+          <TextButton text="Accept" onClick={handleAccept} />
+          <TextButton text="Decline" onClick={handleDecline} />
+        </div>
       </div>
     </div>
   );
 };
 
-export default RideCard;
+export default RequestCard;

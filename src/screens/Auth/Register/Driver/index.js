@@ -2,7 +2,9 @@ import React, { useState} from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+
 import { registerDriver } from "../../../../redux/web3/actions";
+import Layout from "../../../../components/Container";
 
 const RegisterDriver = () => {
   const dispatch = useDispatch();
@@ -53,6 +55,7 @@ const RegisterDriver = () => {
   });
 
   return (
+    <Layout>
     <Form onSubmit={handleSubmit(onSubmit, onError)}>
       {/* Personal Information */}
       <Form.Group className="mb-3" controlId="name">
@@ -153,6 +156,7 @@ const RegisterDriver = () => {
         Register
       </Button>
     </Form>
+    </Layout>
   );
 };
 

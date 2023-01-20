@@ -1,14 +1,15 @@
 import React from "react";
-import { useSearchParams  } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 
 import Sidebar from "../../../components/Sidebar";
+import Layout from "../../../components/Container";
 
 const RequestRide = (props) => {
   // will display these props in passenger request form below
   // extract rideId from here
-  const [searchparams]= useSearchParams();
+  const [searchparams] = useSearchParams();
   console.log("aya data", searchparams.get("driverId"));
 
   const initState = {
@@ -47,21 +48,23 @@ const RequestRide = (props) => {
   return (
     <>
       <Sidebar />
-      <Form onSubmit={handleSubmit(onSubmit, onError)}>
-        <Form.Group className="mb-3" controlId="RequiredSeats">
-          <Form.Label>Required Seats</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Enter required seats"
-            {...register("requiredseats", {
-              required: "required seats is required",
-            })}
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Request a Ride
-        </Button>
-      </Form>
+      <Layout>
+        <Form onSubmit={handleSubmit(onSubmit, onError)}>
+          <Form.Group className="mb-3" controlId="RequiredSeats">
+            <Form.Label>Required Seats</Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="Enter required seats"
+              {...register("requiredseats", {
+                required: "required seats is required",
+              })}
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Request a Ride
+          </Button>
+        </Form>
+      </Layout>
     </>
   );
 };

@@ -3,9 +3,10 @@ import React from "react";
 // Components
 import Sidebar from "../../../components/Sidebar";
 import RidesList from "../../../components/List/RidesList";
+import Layout from "../../../components/Container";
 
 // Mock Data
-import { mockDataRide } from "../../../utils/data";
+import { mockDataRequest } from "../../../utils/data";
 
 const PassengerHome = () => {
   
@@ -13,8 +14,10 @@ const PassengerHome = () => {
   return (
     <>
       <Sidebar />
-      <div>Nearby Rides</div>
-      <RidesList type="Rides" data={mockDataRide} />
+      <Layout>
+      <div>Nearby Rides</div> 
+      <RidesList type="Requests" data={mockDataRequest} />
+      </Layout>
     </>
   );
 };
