@@ -5,7 +5,7 @@ import driverAbi from "../../contractAbis/driver.json"
 
 import web3 from "../../utils/web3";
 
-export const connectRequest = () => {
+export const connectRequest   = () => {
     console.log("requested connection");
     return {
       type: "CONNECTION_REQUEST",
@@ -120,10 +120,31 @@ export const addRide=(contract,address,data)=>{
   return async (dispatch) => {
     try{
       const tx = await contract.methods.createRide(data.source.longitude,data.source.latitude,data.destination.longitude,data.destination.latitude,data.time,Number(data.availableseats)).send({from:address});
-     console.log(tx)
+      console.log(tx)
       
     } catch(err){
       console.log(err)
     }
 }
+} 
+
+const requestRideSuccess=(payload)=>{
+  return {
+    type: "REQUEST_RIDE",
+    payload: payload,
+  };
+}
+
+export const requestRide=(contract,address,rideId,RiderId)=>{
+  return async (dispatch) => {
+    try{
+      const tx = await contract.methods.joinRide(rideId,RiderId).send({
+        from:address
+      })
+
+      console.log(tx)
+    }catch(err){
+      console.log(err)
+    }
+  }
 }

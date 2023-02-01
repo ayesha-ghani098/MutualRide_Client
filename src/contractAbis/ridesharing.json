@@ -207,6 +207,61 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "getAllRides",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "rideId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "creator",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "StartTime",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "seats",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "sourceLong",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "sourceLat",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "destLong",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "destLat",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct RideSharing.Ride[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",

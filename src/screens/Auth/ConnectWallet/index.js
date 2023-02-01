@@ -15,6 +15,7 @@ const ConnectWallet = () => {
 
   const handleClick = () => {
     dispatch(connectWeb3());
+    navigate("/user-selection")
   };
   return (
     <Container fluid className={styles.container}>

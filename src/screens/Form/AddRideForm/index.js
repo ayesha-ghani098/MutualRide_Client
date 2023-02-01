@@ -7,6 +7,7 @@ import AddressPicker from "../../../components/AddressPicker";
 import { addRide } from "../../../redux/web3/actions";
 import Layout from "../../../components/Container";
 import { Heading } from "../../../components/Text";
+import MapContainer from "./googleMap";
 
 const AddRide = () => {
   const initState = {
@@ -18,7 +19,7 @@ const AddRide = () => {
 
   // eslint-disable-next-line no-unused-vars
   const [initialValues, setInitialValues] = React.useState(initState);
-
+  console.log("sadjksakjdbsa")
   const onSubmit = (values, event) => {
     console.log("Values:::", values);
     // name,image,vehicleType would be taken from user account
@@ -72,11 +73,15 @@ const AddRide = () => {
             {...register("time", { required: "Time is required" })}
           />
         </Form.Group>
+        <Form.Group className="mb-3" controlId="Map">
 
+        <MapContainer/>
+        </Form.Group>
         <Button variant="primary" type="submit">
           Add a Ride
         </Button>
       </Form>
+
     </Layout>
   );
 };

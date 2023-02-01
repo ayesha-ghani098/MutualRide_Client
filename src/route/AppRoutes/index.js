@@ -54,17 +54,17 @@ export const appRouter = createBrowserRouter([
       {
         path: "my-rides",
         element: (
-          <Protected isSignedIn={user}>
+          // <Protected isSignedIn={user}>
             <MyRides />
-          </Protected>
+          // </Protected>
         ),
       },
       {
         path: "add-ride",
         element: (
-          <Protected isSignedIn={user}>
+          // <Protected isSignedIn={user}>
             <AddRide />
-          </Protected>
+          // </Protected>
         ),
       },
     ],
@@ -97,9 +97,9 @@ export const appRouter = createBrowserRouter([
       {
         path: "my-rides",
         element: (
-          <Protected isSignedIn={user}>
+          // <Protected isSignedIn={user}>
             <MyRides />
-          </Protected>
+          // </Protected>
         ),
       },
     ],
