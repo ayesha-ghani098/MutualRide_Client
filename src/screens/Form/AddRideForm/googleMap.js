@@ -35,6 +35,8 @@ const MapContainer = () => {
           mapContainerStyle={mapStyles}
           zoom={13}
           center={defaultCenter}
+          initialCenter={{ lat: 47.444, lng: -122.176}}
+
         >
                {
             currentPosition.lat ? 

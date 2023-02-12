@@ -29,7 +29,7 @@ const connectSuccess = (payload) => {
       dispatch(connectRequest());
    try{
     const walletAddress= await web3.eth.requestAccounts();
-    const RScontract=new web3.eth.Contract(ridesharingAbi.abi,'0xEa902E45F9C4eCf1Aae8D5019287F1c8587A48bD');
+    const RScontract=new web3.eth.Contract(ridesharingAbi.abi,'0x1DE003669a6f5De27559bbac2595e90950fD3F7c');
     console.log(walletAddress,RScontract)
     let wallet={address: walletAddress[0]}
     let Ridercontract=new web3.eth.Contract(riderAbi,'0xEbBeBB565692c8A1F096643c9bc1cDf390Aebb1D');
@@ -43,20 +43,68 @@ const connectSuccess = (payload) => {
 //       wallet.address.length - 4,
 //       wallet.address.length
 //     )}`;
+  console.log(userType)
+  console.log("herer")
+    let user={user_type:null,user_type_id:0};
+    let userInfo = userType.events.UserType.returnValues || null;
+    console.log("herer")
 
+    if(userInfo)
+   { user.user_type_id=userInfo.Type;
+    console.log("herer")
 
-// yahan jahan bh connect hurha whn se navigate("/user-selection") krwalo 
+     if(user.user_type_id==0){
+      console.log("herer")
 
+     user.registered=false;
+     }
+     else{
+      user.registered=true;
 
-    console.log(userType)
-    dispatch(
+      if(user.user_type_id==1)
+       { user.user_type="driver"
+         user.driverId=userInfo.id
+         user.registered=true;
+         user.isDriver = true;
+         user.isRider=false;
+        let tx = await RScontract.methods.idToDriver(user.driverid).call();
+        console.log(tx)
+        user.driverinfo={name:tx.name, nic:tx.nic,email:tx.email, mobileNo: tx.cellno, vehicle:{
+          model: tx.car.modelName, regNum:tx.car.regNum
+         },
+         id: tx.id,
+        }
+
+        }
+       else
+        {  console.log("herer")
+
+           user.user_type="rider"  
+         user.riderId=userInfo.id
+         user.registered=true;
+         user.isDriver = false;
+         user.isRider=true;
+         console.log("herer")
+
+         let tx = await RScontract.methods.idToDriver(user.riderId).call();
+          console.log(tx)
+          user.riderinfo={name:tx.name, nic:tx.nic,email:tx.email, mobileNo: tx.cellno,
+           id: tx.Id,
+          }
+       } 
+     }
+
+  }
+  console.log(user)
+
+    dispatch( 
       connectSuccess({  
         wallet,
         RScontract,
         Ridercontract,
         driverContract,
       addressString,
-      userType,
+      user,
       balance:""}
     ))
     }catch(err){
@@ -81,7 +129,8 @@ export const registerDriver=(contract,address,data)=>{
    // data = {name:"asd",nic:"dad",email:"dasd",phoneno:"",regNo:"",model:"asd",licenceNo:""}
       const tx = await contract.methods.registerForDriver(data.name,data.cnic,data.email,data.phoneno,data.regno, data.model,data.licenceNo).send({from:address});
       console.log(tx)
-      console.log(tx.events.registered.returnValues.driverId);
+      
+      window.location.reload();
       dispatch(registerDriverSuccess({driverId:tx.events.registered.returnValues.driverId}))
    }catch(err){
        console.log(err)
@@ -102,7 +151,10 @@ export const registerRider=(contract,address,data)=>{
       const tx = await contract.methods.registerForRider(data.name,data.email,data.phoneno).send({from:address});
       console.log(tx)
       console.log(tx.events.registered.returnValues.driverId);
+      window.location.reload();
+
       dispatch(registerRiderSuccess({RiderId:tx.events.registered.returnValues.driverId}))
+      
    }catch(err){
        console.log(err)
    }
