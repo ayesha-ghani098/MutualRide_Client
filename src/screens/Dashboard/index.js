@@ -25,7 +25,7 @@ const Dashboard = () => {
               <HiLogout size={30} />
         </Container>
       </Navbar>
-      <Sidebar  paths={type === "Driver"? driverpaths : passengerpaths } show={show} handleClose={handleClose} />
+      <Sidebar  type={type} show={show} handleClose={handleClose} />
       <Outlet />
     </>
   );

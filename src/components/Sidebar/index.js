@@ -4,22 +4,27 @@ import { Link } from "react-router-dom";
 
 import styles from "./Sidebar.module.css";
 
-const Sidebar = ({ show, handleClose, paths }) => {
-  // TODO links and styles need to be add
-  console.log("yhi hai", paths);
+import Logo from "../../assets/logo.png"
+
+const Sidebar = ({ show, handleClose, type }) => {
+  
   return (
     <Offcanvas show={show} onHide={handleClose}>
-      <Offcanvas.Header closeButton>
-        <Offcanvas.Title>Mutual Ride</Offcanvas.Title>
+      <Offcanvas.Header className={styles.header} closeButton>
+        <Offcanvas.Title className={styles.title}><img src={Logo} alt="logo"/>Mutual Ride</Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
-        {/* {paths.map((link, index) => {
-          return (
-            <Link key={index} to={link.path}>
-              {link.name}
-            </Link>
-          );
-        })} */}
+        {
+          type === "Driver"?
+          <><Link className={styles.link} to="">Home</Link>
+          <Link  className={styles.link} to="my-rides">My Rides</Link>
+          <Link  className={styles.link} to="add-ride">Add a Ride</Link></>
+          : 
+          <><Link  className={styles.link} to="">Home</Link>
+          <Link  className={styles.link} to="/my-rides">My Rides</Link>
+          <Link  className={styles.link} to="/request-ride">Request a Ride</Link></>
+        }
+ 
       </Offcanvas.Body>
     </Offcanvas>
   );

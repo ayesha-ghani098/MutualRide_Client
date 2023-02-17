@@ -42,28 +42,3 @@ export const mockDataRide = [
   },
 ];
 
-export const driverpaths = [
-  {
-    id:1,
-    name: "Home",
-    path: "/driver",
-  },
-  {
-    id:2,
-    name: "My Rides",
-    path: "/driver/my-rides",
-  },
-];
-
-export const passengerpaths = [
-  {
-    id:1,
-    name: "Home",
-    path: "/passenger",
-  },
-  {
-    id:2,
-    name: "My Rides",
-    path: "/passenger/my-rides",
-  },
-];
