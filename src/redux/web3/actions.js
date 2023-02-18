@@ -29,7 +29,7 @@ const connectSuccess = (payload) => {
       dispatch(connectRequest());
    try{
     const walletAddress= await web3.eth.requestAccounts();
-    const RScontract=new web3.eth.Contract(ridesharingAbi.abi,'0x1DE003669a6f5De27559bbac2595e90950fD3F7c');
+    const RScontract=new web3.eth.Contract(ridesharingAbi.abi,'0x77A90ee4F8E901733a8BC42c8C13F72e6399c2E9');
     console.log(walletAddress,RScontract)
     let wallet={address: walletAddress[0]}
     let Ridercontract=new web3.eth.Contract(riderAbi,'0xEbBeBB565692c8A1F096643c9bc1cDf390Aebb1D');
@@ -37,7 +37,7 @@ const connectSuccess = (payload) => {
     let driverContract=new web3.eth.Contract(driverAbi,'0x1819Cc2E17776dA93c1A84B8463874CaeA21DfFB');
     
     let addressString=null
-    let userType = await RScontract.methods.getUserType(wallet.address).send({from:wallet.address})
+    let userType = await RScontract.methods.getUserType(wallet.address).call()
 //      let addressString = `${wallet.address.slice(0, 5)}...${walconsoconsole.log(walletAddress,RScontract)le.log(walletAddress,RScontract)
 // let.account.slice(
 //       wallet.address.length - 4,
@@ -46,11 +46,12 @@ const connectSuccess = (payload) => {
   console.log(userType)
   console.log("herer")
     let user={user_type:null,user_type_id:0};
-    let userInfo = userType.events.UserType.returnValues || null;
+    let userInfo = userType;
+
     console.log("herer")
 
     if(userInfo)
-   { user.user_type_id=userInfo.Type;
+   { user.user_type_id=userInfo[0];
     console.log("herer")
 
      if(user.user_type_id==0){
@@ -62,12 +63,15 @@ const connectSuccess = (payload) => {
       user.registered=true;
 
       if(user.user_type_id==1)
-       { user.user_type="driver"
-         user.driverId=userInfo.id
+       {
+        console.log("herer")
+     console.log(user)
+        user.user_type="driver"
+         user.driverId=userInfo[1]
          user.registered=true;
          user.isDriver = true;
          user.isRider=false;
-        let tx = await RScontract.methods.idToDriver(user.driverid).call();
+        let tx = await RScontract.methods.idToDriver(user.driverId).call();
         console.log(tx)
         user.driverinfo={name:tx.name, nic:tx.nic,email:tx.email, mobileNo: tx.cellno, vehicle:{
           model: tx.car.modelName, regNum:tx.car.regNum
@@ -76,21 +80,49 @@ const connectSuccess = (payload) => {
         }
 
         }
+        else if(user.user_type_id==2){
+          console.log("herer")
+
+          user.user_type="rider"  
+        user.riderId=userInfo.id
+        user.registered=true;
+        user.isDriver = false;
+        user.isRider=true;
+        console.log("herer")
+
+        let tx = await RScontract.methods.idToDriver(user.riderId).call();
+         console.log(tx)
+         user.riderinfo={name:tx.name, nic:tx.nic,email:tx.email, mobileNo: tx.cellno,
+          id: tx.Id,
+         }
+        }
        else
         {  console.log("herer")
 
-           user.user_type="rider"  
-         user.riderId=userInfo.id
+           user.user_type="both"  
+         user.riderId=userInfo[1]
+         user.driverId=userInfo[1]
+
          user.registered=true;
-         user.isDriver = false;
+         user.isDriver = true;
          user.isRider=true;
          console.log("herer")
 
-         let tx = await RScontract.methods.idToDriver(user.riderId).call();
+         let tx = await RScontract.methods.idToRider(user.riderId).call();
+
           console.log(tx)
           user.riderinfo={name:tx.name, nic:tx.nic,email:tx.email, mobileNo: tx.cellno,
            id: tx.Id,
           }
+           tx = await RScontract.methods.idToDriver(user.driverId).call();
+
+          user.driverinfo={name:tx.name, nic:tx.nic,email:tx.email, mobileNo: tx.cellno, vehicle:{
+            model: tx.car.modelName, regNum:tx.car.regNum
+           },
+           id: tx.id,
+          }
+
+
        } 
      }
 
@@ -150,7 +182,6 @@ export const registerRider=(contract,address,data)=>{
    // data = {name:"asd",nic:"dad",email:"dasd",phoneno:"",regNo:"",model:"asd",licenceNo:""}
       const tx = await contract.methods.registerForRider(data.name,data.email,data.phoneno).send({from:address});
       console.log(tx)
-      console.log(tx.events.registered.returnValues.driverId);
       window.location.reload();
 
       dispatch(registerRiderSuccess({RiderId:tx.events.registered.returnValues.driverId}))
@@ -172,6 +203,7 @@ const addRideSuccess=(payload)=>{
 export const addRide=(contract,address,data)=>{
   return async (dispatch) => {
     try{
+      console.log(data,address)
       const tx = await contract.methods.createRide(data.source.longitude,data.source.latitude,data.destination.longitude,data.destination.latitude,data.time,Number(data.availableseats)).send({from:address});
       console.log(tx)
       

@@ -38,7 +38,7 @@ const web3Reducer = (state = initialState, action) => {
                 loading: false,
                 addressString: action.payload.addressString,
                 userType: action.payload.userType,
-                user:true
+                user:action.payload.user
             };
             case "DRIVER_SUCCESS":
                 return{

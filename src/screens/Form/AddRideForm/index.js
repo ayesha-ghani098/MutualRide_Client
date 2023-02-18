@@ -26,8 +26,8 @@ const AddRide = () => {
     // source and destination would be taken from maps work
     // source:{latitude:"",longitude:""}
     // destination:{latitude:"",longitude:""}
-    values.source = { latitude: "", longitude: "" };
-    values.destination = { latitude: "", longitude: "" };
+    values.source = { latitude: "1.23.2", longitude: "1.3.5" };
+    values.destination = { latitude: "3.5", longitude: "3.5" };
     dispatch(addRide(web3.rideSharingContractObj, web3.wallet.address, values));
     //event.target.reset();
   };

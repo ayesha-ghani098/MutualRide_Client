@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -12,11 +12,29 @@ const ConnectWallet = () => {
   const web3 = useSelector((state) => state.web3);
   let navigate = useNavigate();
   let dispatch = useDispatch();
-
-  const handleClick = () => {
-    dispatch(connectWeb3());
+  const handleClick =  async() => {
+   let a = await dispatch(connectWeb3());
     navigate("/user-selection")
   };
+  console.log(web3)
+
+  useEffect(()=>{
+    if(web3.connected){
+      if(web3.user.user_type=="driver"){
+        console.log("heree")
+        navigate("/driver");
+      }else if(web3.user.user_type=="rider"){
+        console.log("heree")
+
+        navigate("/passernger");
+
+      }else if(web3.user.user_type=="both") {
+        console.log("heree")
+
+        navigate("/user-selection")}
+
+    }
+  },[web3.connected])
   return (
     <Container fluid className={styles.container}>
       <div className={styles.centeredDiv}>
