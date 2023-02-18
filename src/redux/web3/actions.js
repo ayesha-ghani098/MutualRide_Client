@@ -29,7 +29,7 @@ const connectSuccess = (payload) => {
       dispatch(connectRequest());
    try{
     const walletAddress= await web3.eth.requestAccounts();
-    const RScontract=new web3.eth.Contract(ridesharingAbi.abi,'0x77A90ee4F8E901733a8BC42c8C13F72e6399c2E9');
+    const RScontract=new web3.eth.Contract(ridesharingAbi.abi,'0xE0D1b0a33197728029FDeC019E8d36D4af2b0a58');
     console.log(walletAddress,RScontract)
     let wallet={address: walletAddress[0]}
     let Ridercontract=new web3.eth.Contract(riderAbi,'0xEbBeBB565692c8A1F096643c9bc1cDf390Aebb1D');
