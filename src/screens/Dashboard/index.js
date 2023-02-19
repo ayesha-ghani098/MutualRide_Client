@@ -8,10 +8,10 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
 import { driverpaths, passengerpaths } from "../../utils/data";
 
-const type="Driver"
 const Dashboard = () => {
   const web3 = useSelector((state) => state.web3);
-
+  let params = window.location.pathname.split('/');
+ console.log(window.location.pathname.split('/'))
   const [show, setShow] = useState(false);
 
   const handleShow = () => {
@@ -28,7 +28,7 @@ const Dashboard = () => {
               <HiLogout size={30} />
         </Container>
       </Navbar>
-      <Sidebar  type={type} show={show} handleClose={handleClose} />
+      <Sidebar  type={params[1]} show={show} handleClose={handleClose} />
       <Outlet />
     </>
   );

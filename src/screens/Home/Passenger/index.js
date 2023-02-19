@@ -13,12 +13,12 @@ import { useSelector, useDispatch } from "react-redux";
 const PassengerHome = () => {
   const web3 = useSelector((state) => state.web3);
  const [data,setData] = useState([]);
+ console.log(web3)
   useEffect( ()=>{
-    
-    fetchRides()
+  
     async function fetchRides(){
-      const RScontract=new web3Ins.eth.Contract(ridesharingAbi,'0xeF8bc14CCF511a3b66F279E28f4A601c10B9EF32');
-      let dataReq = await RScontract.methods.getAllRides().call()
+      let dataReq = await web3.rideSharingContractObj.methods.getAllRides().call()
+      console.log(dataReq)
       const rides=await Promise.all(
         dataReq.map(
           async(i)=>{
@@ -27,10 +27,10 @@ const PassengerHome = () => {
               address:i.creator,
               startTime:i.StartTime,
               requiredSeats:i.seats,
-              sourceLong:Number(i.sourceLong),
-              sourceLat:Number(i.sourceLat),
-              destLong:Number(i.destLong),
-              destLat:Number(i.destLat),
+              sourceLong:i.sourceLong,
+              sourceLat:i.sourceLat,
+              destLong:i.destLong,
+              destLat:i.destLat,
               source:"",
               destination:"",
               image:"",
@@ -41,17 +41,20 @@ const PassengerHome = () => {
           }
         )
       )
-      console.log(dataReq)
+      console.log(rides)
+
       setData(rides);
     }
-    },[])
+      
+    fetchRides()
+    },[web3.rideSharingContractObj])
 
   return (
     <>
       <Sidebar />
       <Layout>
         <Heading text="Nearby Rides" />
-        <RidesList type="Requests" data={mockDataRequest} />
+        <RidesList type="Requests" data={data} />
       </Layout>
     </>
   );

@@ -1,7 +1,8 @@
 import React from "react";
 import { RequestCard, RideCard } from "../../Cards";
-
 const RidesList = ({ data, type }) => {
+  console.log(data)
+
   return (
     <>
       {type === "Rides"

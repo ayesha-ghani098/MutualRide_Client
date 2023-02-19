@@ -12,7 +12,9 @@ const initialState = {
     driverId:null,
     isRider:false,
     riderId:null,
-    user:false
+    user:false,
+    selectedUser:null
+
 }
 
 const web3Reducer = (state = initialState, action) => {
@@ -24,6 +26,12 @@ const web3Reducer = (state = initialState, action) => {
                 ...initialState,
                 loading: true,
             };
+            case "SET_SELECTED_USER":
+             return{
+                ...initialState,
+                selectedUser: action.payload.selectedUser
+             }
+
         case "CONNECTION_SUCCESS":
             console.log("connection sucess...");
             console.log(action.payload)

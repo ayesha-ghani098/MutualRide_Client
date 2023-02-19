@@ -1,33 +1,41 @@
 import React from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 import { requestRide } from "../../../redux/web3/actions";
 import Layout from "../../../components/Container";
 import { Heading } from "../../../components/Text";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const RequestRide = (props) => {
   // will display these props in passenger request form below
   // extract rideId from here
+ // let { rideId } = useParams();
+
   const [searchparams] = useSearchParams();
-  console.log("aya data", searchparams.get("driverId"));
+  console.log("aya data", searchparams.get("rideId"));
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const web3 = useSelector(state=>state.web3)
   const initState = {
     requiredseats: "",
   };
+  console.log(web3)
 
   // eslint-disable-next-line no-unused-vars
   const [initialValues, setInitialValues] = React.useState(initState);
 
-  const onSubmit = (values, event) => {
+  const onSubmit =  async (values, event) => {
     console.log("Values:::", values);
-    dispatch(requestRide());
+   const tx = await web3.rideSharingContractObj.methods.joinRide(searchparams.get("rideId"),web3.user.riderinfo.id).send({from:web3.wallet.address})
+     console.log(tx);
+    //joinRide(uint rideId, uint riderId)
     // name,image would be taken from user account
     // source and destination would be taken from maps work
     // source:{latitude:"",longitude:""}
     // destination:{latitude:"",longitude:""}
     event.target.reset();
+    navigate("/passenger")
 
   };
 
@@ -64,7 +72,7 @@ const RequestRide = (props) => {
             />
           </Form.Group>
           <Button variant="primary" type="submit">
-            Request a Ride
+            Join this Ride
           </Button>
         </Form>
       </Layout>

@@ -6,27 +6,33 @@ import { MdPeopleOutline } from "react-icons/md";
 import styles from "./RequestCard.module.css";
 import Avatar from "../../../assets/avatar.png";
 import { TextButton } from "../../Buttons";
+import { useDispatch, useSelector } from "react-redux";
 
 const RideCard = (props) => {
   const {
     id,
     name,
     image,
-    source,
-    destination,
-    time,
+    source ,sourceLat,sourceLong,
+    destination, destLong ,destLat,
+    startTime,
     seatsAvailable,
     costPerKm,
     vehicleType,
   } = props.request;
+  const dispatch = useDispatch();
+  const web3 = useSelector(state=>state.web3);
+  console.log(props.request)
   const navigate = useNavigate();
-
-  const handleNavigation = () => {
-    console.log(id);
+  
+  const handleNavigation = async () => {
+    // const tx = await web3.rideSharingContractObj.methods.joinRide(id,user.riderInfo.id)
+    // console.log(tx);
+    //joinRide(uint rideId, uint riderId)
     navigate({
       pathname: "/passenger/request-ride",
       search: createSearchParams({
-        driverId: id,
+        rideId: id,
       }).toString(),
     });
   };
@@ -40,12 +46,12 @@ const RideCard = (props) => {
       />
       <div className={styles.cardBody}>
         <h6>{name}</h6>
-        <p>source: {source}</p>
-        <p>destination: {destination}</p>
+        <p>source: {sourceLat+", "+sourceLong}</p>
+        <p>destination: {destLat+", "+destLong}</p>
         <div className={styles.cardBottom}>
           <div>
             <AiOutlineFieldTime />
-            {time}
+            {startTime}
           </div>
           <div>
             <MdPeopleOutline /> {seatsAvailable}

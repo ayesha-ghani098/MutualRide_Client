@@ -233,3 +233,12 @@ export const requestRide=(contract,address,rideId,RiderId)=>{
     }
   }
 }
+
+
+export const setSelectedUser=(type)=>{
+  let payload={selectedUser:type}
+  return {
+    type: "SET_SELECTED_USER",
+    payload: payload,
+  };
+}

@@ -8,6 +8,7 @@ import { TextButton } from "../../Buttons";
 
 const RequestCard = (props) => {
   const { name, image, source, destination, requiredSeats } = props.ride;
+  console.log(props.ride)
   const navigate = useNavigate();
 
   const handleAccept = () => {

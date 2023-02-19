@@ -8,10 +8,11 @@ import Logo from "../../../../assets/logo.png";
 import Driver from "../../../../assets/Selection/img1.png";
 import Passenger from "../../../../assets/Selection/img2.png";
 import { ImgButton } from "../../../../components/Buttons";
+import { setSelectedUser } from "../../../../redux/web3/actions";
 
 const UserSelection = () => {
   const web3 = useSelector((state) => state.web3);
-
+ const dispatch = useDispatch ();
   let navigate = useNavigate();
   const handleSelection = (type) => {
     type === "Driver"
@@ -22,6 +23,7 @@ const UserSelection = () => {
         if(web3.connected){
           if(web3.user.user_type=="driver" || web3.user.user_type=="both" ){
             console.log("heree")
+            dispatch(setSelectedUser("driver"))
             navigate("/driver");
           }
     
@@ -33,6 +35,8 @@ const UserSelection = () => {
           if(web3.connected){
             if(web3.user.user_type=="rider" || web3.user.user_type=="both"){
               console.log("heree")
+              dispatch(setSelectedUser("rider"))
+
               navigate("/passenger");
             }
       
