@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +19,8 @@ const AddRide = () => {
 
   // eslint-disable-next-line no-unused-vars
   const [initialValues, setInitialValues] = React.useState(initState);
+  const [source, setSource] = useState("");
+  const [destination, setDestination] = useState("");
   console.log("sadjksakjdbsa")
   const onSubmit = (values, event) => {
     console.log("Values:::", values);
@@ -26,8 +28,8 @@ const AddRide = () => {
     // source and destination would be taken from maps work
     // source:{latitude:"",longitude:""}
     // destination:{latitude:"",longitude:""}
-    values.source = { latitude: "1.23.2", longitude: "1.3.5" };
-    values.destination = { latitude: "3.5", longitude: "3.5" };
+    values.source = { latitude: ()=>source.lat(), longitude: ()=> source.lng()};
+    values.destination = { latitude: destination.lat, longitude: destination.lng};
     dispatch(addRide(web3.rideSharingContractObj, web3.wallet.address, values));
     //event.target.reset();
   };
@@ -75,7 +77,7 @@ const AddRide = () => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="Map">
 
-        <MapContainer/>
+        <MapContainer source={source} destination={destination} setDestination={setDestination} setSource={setSource} />
         </Form.Group>
         <Button variant="primary" type="submit">
           Add a Ride

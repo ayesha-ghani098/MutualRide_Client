@@ -14,11 +14,9 @@ const containerStyle = {
 
 
 const libraries=["places"]
-const Map = () => {
+const Map = ({destination,setDestination,source,setSource}) => {
   const [response, setResponse] = useState(null);
 
-  const [source, setSource] = useState("");
-  const [destination, setDestination] = useState("");
   const [sourceSearchBox, setSourceSearchBox] = useState(null);
   const [destinationSearchBox, setdestinationSearchBox] = useState(null);
 

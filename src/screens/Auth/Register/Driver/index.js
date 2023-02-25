@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerDriver } from "../../../../redux/web3/actions";
 import Layout from "../../../../components/Container";
 import { Heading } from "../../../../components/Text";
+import { useNavigate } from "react-router-dom";
 
 const RegisterDriver = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const web3 = useSelector((state) => state.web3);
   const initState = {
     name: "ASFAR",
@@ -31,12 +33,13 @@ const RegisterDriver = () => {
     licenceNo: "1223232",
   });
 
-  const onSubmit = (values, event) => {
+  const onSubmit = async (values, event) => {
     console.log("Values::", values);
-    dispatch(
+   let a = await dispatch(
       registerDriver(web3.rideSharingContractObj, web3.wallet.address, values)
     );
     // event.target.reset();
+    navigate("/driver")
   };
 
   const onError = (error) => {

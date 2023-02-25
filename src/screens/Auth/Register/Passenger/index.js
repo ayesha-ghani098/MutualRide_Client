@@ -6,8 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerRider } from "../../../../redux/web3/actions";
 import Layout from "../../../../components/Container";
 import { Heading } from "../../../../components/Text";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPassenger = () => {
+  const navigate = useNavigate()
+
   const web3 = useSelector((state) => state.web3);
   const dispatch = useDispatch();
   const initState = {
@@ -24,13 +27,13 @@ const RegisterPassenger = () => {
     phoneno: "",
     termsAndConditions: false,
   });
-  const onSubmit = (values, event) => {
-    console.log("Values:::", values);
+  const onSubmit = async (values, event) => {
+   let a = await console.log("Values:::", values);
     dispatch(
       registerRider(web3.rideSharingContractObj, web3.wallet.address, values)
     );
-
-    event.target.reset();
+    navigate("/passenger")
+    //event.target.reset();
   };
 
   const onError = (error) => {
