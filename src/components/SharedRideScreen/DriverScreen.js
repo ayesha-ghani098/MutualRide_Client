@@ -1,52 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
+import React, { useEffect, useState } from 'react';
+import { useFirebase } from 'firebase/app';
+import 'firebase/database';
+import { GoogleMap, LoadScript, DirectionsService, DirectionsRenderer, Marker } from '@react-google-maps/api';
 
-const libraries = ['places'];
-const mapContainerStyle = {
-  width: '100vw',
-  height: '100vh',
-};
-const center = {
-  lat: 37.7749,
-  lng: -122.4194,
-};
-const options = {
-  disableDefaultUI: true,
-  zoomControl: true,
-};
-
-const LiveTracking = () => {
-  const [currentPosition, setCurrentPosition] = useState(center);
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: YOUR_API_KEY_HERE,
-    libraries,
-  });
+const DriverMap = ({ driverId, destination }) => {
+  const firebase = useFirebase();
+  const [driverLocation, setDriverLocation] = useState({ lat: 0, lng: 0 });
+  const [directions, setDirections] = useState(null);
 
   useEffect(() => {
-    const watchId = navigator.geolocation.watchPosition(
-      ({ coords: { latitude, longitude } }) => {
-        setCurrentPosition({ lat: latitude, lng: longitude });
-      },
-      (error) => console.error(error),
-      { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
-    );
+    const driverLocationRef = firebase.database().ref(`drivers/${driverId}/location`);
+    driverLocationRef.on('value', (snapshot) => {
+      const location = snapshot.val();
+      setDriverLocation({ lat: location.latitude, lng: location.longitude });
+    });
 
-    return () => navigator.geolocation.clearWatch(watchId);
-  }, []);
+    return () => {
+      driverLocationRef.off('value');
+    };
+  }, [firebase, driverId]);
 
-  if (loadError) return 'Error loading maps';
-  if (!isLoaded) return 'Loading maps';
+  const directionsCallback = (response) => {
+    if (response !== null) {
+      setDirections(response);
+    }
+  };
 
   return (
-    <GoogleMap
-      mapContainerStyle={mapContainerStyle}
-      zoom={15}
-      center={currentPosition}
-      options={options}
-    >
-      <Marker position={currentPosition} icon={{ url: '/car.svg', scaledSize: new window.google.maps.Size(40, 40) }} />
-    </GoogleMap>
+    <LoadScript googleMapsApiKey="YOUR_API_KEY">
+      <GoogleMap center={driverLocation} zoom={15}>
+        <Marker position={driverLocation} />
+
+        {destination && (
+          <DirectionsService
+            options={{
+              destination,
+              origin: driverLocation,
+              travelMode: 'DRIVING',
+            }}
+            callback={directionsCallback}
+          />
+        )}
+
+        {directions && <DirectionsRenderer directions={directions} />}
+      </GoogleMap>
+    </LoadScript>
   );
 };
 
-export default LiveTracking;
+export default DriverMap;
