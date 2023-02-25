@@ -1,55 +1,72 @@
-import React,{useState} from 'react';
-import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import React, { useState } from "react";
+import {
+  GoogleMap,
+  LoadScript,
+  Marker,
+  StandaloneSearchBox,
+} from "@react-google-maps/api";
 
-const MapContainer = () => {
-    const [ selected, setSelected ] = useState({});
-    const onSelect = item => {
-        setSelected(item);
-      }
-  const mapStyles = {        
-    height: "100vh",
-    width: "100%"};
-  
-  const defaultCenter = {
-    lat: 41.3851, lng: 2.1734
-  }
-  const [ currentPosition, setCurrentPosition ] = useState({});
-  
-  const success = position => {
-    const currentPosition = {
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
+const containerStyle = {
+  width: "100%",
+  height: "100vh",
+};
+
+const center = {
+  lat: 37.7749,
+  lng: -122.4194,
+};
+
+const Map = () => {
+  const [source, setSource] = useState("");
+  const [destination, setDestination] = useState("");
+
+  const onPlacesChanged = () => {
+    const places = searchBox.getPlaces();
+    if (places.length > 0) {
+      setSource(places[0].name);
     }
-    setCurrentPosition(currentPosition);
   };
-  console.log(currentPosition)
-  const onMarkerDragEnd = (e) => {
-    const lat = e.latLng.lat();
-    const lng = e.latLng.lng();
-    setCurrentPosition({ lat, lng})
+
+  const onLoad = (ref) => {
+    searchBox = ref;
   };
+
+  let searchBox = null;
+
   return (
-     <LoadScript
-       googleMapsApiKey='AIzaSyCt0we836OdQbFQolLK_aGPZHcnyr-IKp0'>
-        <GoogleMap
-          mapContainerStyle={mapStyles}
-          zoom={13}
-          center={defaultCenter}
-          initialCenter={{ lat: 47.444, lng: -122.176}}
-
+    <LoadScript
+      googleMapsApiKey="AIzaSyCt0we836OdQbFQolLK_aGPZHcnyr-IKp0"
+      libraries={["places"]}
+    >
+      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={13}>
+        {source && <Marker position={center} />}
+        <StandaloneSearchBox
+          onLoad={onLoad}
+          onPlacesChanged={onPlacesChanged}
         >
-               {
-            currentPosition.lat ? 
-            <Marker
-            position={currentPosition}
-            onDragEnd={(e) => onMarkerDragEnd(e)}
-            draggable={true} /> :
-            null
-          }
-  
-        </GoogleMap> 
-     </LoadScript>
-  )
-}
+          <input
+            type="text"
+            placeholder="Enter source location"
+            style={{
+              boxSizing: `border-box`,
+              border: `1px solid transparent`,
+              width: `240px`,
+              height: `32px`,
+              padding: `0 12px`,
+              borderRadius: `3px`,
+              boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+              fontSize: `14px`,
+              outline: `none`,
+              textOverflow: `ellipses`,
+              position: "absolute",
+              left: "50%",
+              marginLeft: "-120px",
+            }}
+          />
+        </StandaloneSearchBox>
+      </GoogleMap>
+    </LoadScript>
+  );
+};
 
-export default MapContainer;
+export default Map;

@@ -8,7 +8,7 @@ const AddressPicker = () => {
         getPlacePredictions,
         isPlacePredictionsLoading,
       } = usePlacesService({
-        apiKey: "",
+        apiKey: "AIzaSyCt0we836OdQbFQolLK_aGPZHcnyr-IKp0",
       });
 
   useEffect(() => {
