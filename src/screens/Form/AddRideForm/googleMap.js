@@ -4,6 +4,7 @@ import {
   LoadScript,
   Marker,
   StandaloneSearchBox,
+  DirectionsService, DirectionsRenderer
 } from "@react-google-maps/api";
 
 const containerStyle = {
@@ -14,6 +15,8 @@ const containerStyle = {
 
 const libraries=["places"]
 const Map = () => {
+  const [response, setResponse] = useState(null);
+
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
   const [sourceSearchBox, setSourceSearchBox] = useState(null);
@@ -62,6 +65,12 @@ const Map = () => {
     setdestinationSearchBox(ref)
   };
 
+  const directionsCallback = (res) => {
+    if (res !== null) {
+      setResponse(res);
+    }
+  };
+
   return (
     <LoadScript
       googleMapsApiKey="AIzaSyCt0we836OdQbFQolLK_aGPZHcnyr-IKp0"
@@ -72,6 +81,25 @@ const Map = () => {
         {destination && <Marker position={destination} />}
 
         <>
+        {source !== '' && destination !== '' && (
+          <DirectionsService
+            options={{
+              destination: destination,
+              origin: source,
+              travelMode: 'DRIVING'
+            }}
+            callback={directionsCallback}
+          />
+        )}
+
+        {response !== null && (
+          <DirectionsRenderer
+            options={{
+              directions: response
+            }}
+          />
+        )}
+
         <StandaloneSearchBox
       onLoad={onSourceLoad}
       onPlacesChanged={onSourceChanged}
