@@ -15,12 +15,17 @@ const center = {
   lat: 37.7749,
   lng: -122.4194,
 };
-
+const libraries=["places"]
 const Map = () => {
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
+  const [searchBox, setSearchBox] = useState(null);
 
   const onPlacesChanged = () => {
+    if(!searchBox){
+      console.error('Search boxes not initialized');
+    return
+    }
     const places = searchBox.getPlaces();
     if (places.length > 0) {
       setSource(places[0].name);
@@ -28,18 +33,18 @@ const Map = () => {
   };
 
   const onLoad = (ref) => {
-    searchBox = ref;
+    setSearchBox(ref)
   };
 
-  let searchBox = null;
 
   return (
     <LoadScript
       googleMapsApiKey="AIzaSyCt0we836OdQbFQolLK_aGPZHcnyr-IKp0"
-      libraries={["places"]}
+      libraries={libraries}
     >
       <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={13}>
         {source && <Marker position={center} />}
+        <>
         <StandaloneSearchBox
           onLoad={onLoad}
           onPlacesChanged={onPlacesChanged}
@@ -64,6 +69,7 @@ const Map = () => {
             }}
           />
         </StandaloneSearchBox>
+        </>
       </GoogleMap>
     </LoadScript>
   );
