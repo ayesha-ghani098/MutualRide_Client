@@ -17,12 +17,14 @@ const Sidebar = ({ show, handleClose, type }) => {
         {
           type === "Driver"?
           <><Link className={styles.link} to="">Home</Link>
+          <Link className={styles.link} to="">My Profile</Link>
           <Link  className={styles.link} to="/driver/my-rides">My Rides</Link>
           <Link  className={styles.link} to="/driver/add-ride">Add a Ride</Link></>
           : 
           <><Link  className={styles.link} to="">Home</Link>
+          <Link className={styles.link} to="">My Profile</Link>
           <Link  className={styles.link} to="/passenger/my-rides">My Rides</Link>
-          <Link  className={styles.link} to="/passender/request-ride">Request a Ride</Link></>
+          </>
         }
  
       </Offcanvas.Body>
