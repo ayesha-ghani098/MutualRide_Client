@@ -1,4 +1,4 @@
-const initialState = {
+const initState = {
     loading: false,
     connected: false,
     balance: null,
@@ -17,18 +17,18 @@ const initialState = {
 
 }
 
-const web3Reducer = (state = initialState, action) => {
+const web3Reducer = (state=initState, action) => {
     switch (action.type) {
 
         case "CONNECTION_REQUEST":
             console.log("connecting...");
             return {
-                ...initialState,
+                ...state,
                 loading: true,
             };
             case "SET_SELECTED_USER":
              return{
-                ...initialState,
+                ...state,
                 selectedUser: action.payload.selectedUser
              }
 
@@ -61,7 +61,7 @@ const web3Reducer = (state = initialState, action) => {
         case "CONNECTION_FAILED":
             console.log("connection failed...");
             return {
-                ...initialState,
+                ...state,
                 loading: false,
             };
         default:

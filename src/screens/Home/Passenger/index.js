@@ -17,6 +17,8 @@ const PassengerHome = () => {
   useEffect( ()=>{
   
     async function fetchRides(){
+
+      if(web3.rideSharingContractObj){
       let dataReq = await web3.rideSharingContractObj.methods.getAllRides().call()
       console.log(dataReq)
       const rides=await Promise.all(
@@ -44,10 +46,11 @@ const PassengerHome = () => {
       console.log(rides)
 
       setData(rides);
+        }
     }
       
     fetchRides()
-    },[web3.rideSharingContractObj])
+    },[web3])
 
   return (
     <>

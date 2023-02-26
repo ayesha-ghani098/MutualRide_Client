@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +21,7 @@ const RegisterDriver = () => {
     model: "SDSD",
     licenceNo: "1223232",
   };
+
   console.log(web3);
   // eslint-disable-next-line no-unused-vars
   const [initialValues, setInitialValues] = useState({
@@ -32,7 +33,12 @@ const RegisterDriver = () => {
     model: "SDSD",
     licenceNo: "1223232",
   });
+    useEffect(()=>{
 
+      if(web3.user.isDriver){
+        navigate("/Driver")
+      }
+    },[])
   const onSubmit = async (values, event) => {
     console.log("Values::", values);
    let a = await dispatch(

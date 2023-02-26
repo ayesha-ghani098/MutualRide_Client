@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +19,12 @@ const RegisterPassenger = () => {
     phoneno: "",
     termsAndConditions: false,
   };
+  useEffect(()=>{
+
+    if(web3.user.isPassenger){
+      navigate("/Passenger")
+    }
+  },[])
 
   // eslint-disable-next-line no-unused-vars
   const [initialValues, setInitialValues] = React.useState({
