@@ -12,9 +12,12 @@ const MyRides = () => {
     async function fetch(){
       if(params[1]=="driver"){
         let tx = await web3.rideSharingContractObj.methods.getRidesByRiderId()
+        console.log(tx)
       }
         else if(params[1]=="passenger") {
            let tx = await web3.rideSharingContractObj.methods.getRidesByDriver()
+           console.log(tx)
+
           }
     }
     fetch()
