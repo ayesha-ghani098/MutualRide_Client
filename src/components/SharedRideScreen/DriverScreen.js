@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useFirebase } from 'firebase/app';
-import 'firebase/database';
+import { fbIns as firebase } from '../../firebase/firebaseIns';
 import { GoogleMap, LoadScript, DirectionsService, DirectionsRenderer, Marker } from '@react-google-maps/api';
 
 const DriverMap = ({ driverId, destination }) => {
-  const firebase = useFirebase();
   const [driverLocation, setDriverLocation] = useState({ lat: 0, lng: 0 });
   const [directions, setDirections] = useState(null);
 

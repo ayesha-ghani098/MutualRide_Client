@@ -1,22 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import firebase from 'firebase/app';
-import 'firebase/database';
+import { fbIns as firebase } from '../../firebase/firebaseIns';
 
 const UserScreen = () => {
   const [driverLocation, setDriverLocation] = useState(null);
 
   useEffect(() => {
-    // Initialize Firebase
-    firebase.initializeApp({
-      apiKey: 'your-api-key',
-      authDomain: 'your-auth-domain',
-      databaseURL: 'your-database-url',
-      projectId: 'your-project-id',
-      storageBucket: 'your-storage-bucket',
-      messagingSenderId: 'your-messaging-sender-id',
-      appId: 'your-app-id',
-    });
 
     // Get real-time updates of driver's location from Firebase
     const driverLocationRef = firebase.database().ref('driverLocation');
