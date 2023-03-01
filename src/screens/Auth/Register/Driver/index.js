@@ -34,8 +34,10 @@ const RegisterDriver = () => {
     licenceNo: "1223232",
   });
     useEffect(()=>{
-
-      if(web3.user.isDriver){
+     if(!web3.registered){
+      navigate("/register-driver")
+     }
+     else  if(web3.user.isDriver){
         navigate("/Driver")
       }
     },[])
