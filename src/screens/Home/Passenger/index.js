@@ -54,7 +54,6 @@ const PassengerHome = () => {
 
   return (
     <>
-      <Sidebar />
       <Layout>
         <Heading text="Nearby Rides" />
         <RidesList type="Requests" data={data} />

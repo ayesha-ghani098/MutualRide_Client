@@ -25,7 +25,6 @@ const MyRides = () => {
    },[web3.rideSharingContractObj])
   return (
     <>
-    <Sidebar/>
     <div>MyRides</div>
     </>
   )

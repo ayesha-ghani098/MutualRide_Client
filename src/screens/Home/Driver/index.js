@@ -19,7 +19,6 @@ const DriverHome = () => {
 
   return (
     <>
-      <Sidebar />
       <Layout>
         <TextButton text="Add a Ride" onClick={handleNavigation} />
         <Heading text="Requests" />

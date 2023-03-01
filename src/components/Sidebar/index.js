@@ -2,31 +2,50 @@ import React from "react";
 import { Offcanvas } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+// Style and Assets
 import styles from "./Sidebar.module.css";
-
-import Logo from "../../assets/logo.png"
+import Logo from "../../assets/logo.png";
 
 const Sidebar = ({ show, handleClose, type }) => {
-  
+  // TODO yhi nhi pta k dekhlo k type me aa kia rha or yhn check kia hurha
+
   return (
     <Offcanvas show={show} onHide={handleClose}>
       <Offcanvas.Header className={styles.header} closeButton>
-        <Offcanvas.Title className={styles.title}><img src={Logo} alt="logo"/>Mutual Ride</Offcanvas.Title>
+        <Offcanvas.Title className={styles.title}>
+          <img src={Logo} alt="logo" />
+          Mutual Ride
+        </Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
-        {
-          type === "Driver"?
-          <><Link className={styles.link} to="">Home</Link>
-          <Link className={styles.link} to="">My Profile</Link>
-          <Link  className={styles.link} to="/driver/my-rides">My Rides</Link>
-          <Link  className={styles.link} to="/driver/add-ride">Add a Ride</Link></>
-          : 
-          <><Link  className={styles.link} to="">Home</Link>
-          <Link className={styles.link} to="">My Profile</Link>
-          <Link  className={styles.link} to="/passenger/my-rides">My Rides</Link>
+        {type === "driver" ? (
+          <>
+            <Link className={styles.link} to="">
+              Home
+            </Link>
+            <Link className={styles.link} to="">
+              My Profile
+            </Link>
+            <Link className={styles.link} to="/driver/my-rides">
+              My Rides
+            </Link>
+            <Link className={styles.link} to="/driver/add-ride">
+              Add a Ride
+            </Link>
           </>
-        }
- 
+        ) : (
+          <>
+            <Link className={styles.link} to="">
+              Home
+            </Link>
+            <Link className={styles.link} to="">
+              My Profile
+            </Link>
+            <Link className={styles.link} to="/passenger/my-rides">
+              My Rides
+            </Link>
+          </>
+        )}
       </Offcanvas.Body>
     </Offcanvas>
   );
