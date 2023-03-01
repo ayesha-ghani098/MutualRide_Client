@@ -16,6 +16,8 @@ import {
   UserSelection,
 } from "../../screens/Auth";
 import Dashboard from "../../screens/Dashboard";
+import PassengerTracking from "../../screens/Tracking/Passenger";
+import DriverTracking from "../../screens/Tracking/Driver";
 
 let user = true;
 
@@ -55,6 +57,14 @@ const AppRoutes = (props) => {
             }
           />
           <Route
+            path="tracking"
+            element={
+              <Protected isSignedIn={user}>
+                <DriverTracking />
+              </Protected>
+            }
+          />
+          <Route
             path="add-ride"
             element={
               <Protected isSignedIn={user}>
@@ -76,6 +86,14 @@ const AppRoutes = (props) => {
             element={
               <Protected isSignedIn={user}>
                 <PassengerHome />
+              </Protected>
+            }
+          />
+          <Route
+            path="tracking"
+            element={
+              <Protected isSignedIn={user}>
+                <PassengerTracking />
               </Protected>
             }
           />
