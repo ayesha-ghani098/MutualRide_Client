@@ -14,7 +14,7 @@ const containerStyle = {
 
 
 const libraries=["places"]
-const Map = ({destination,setDestination,source,setSource}) => {
+const Map = ({setLocationName, locationName, destination,setDestination,source,setSource}) => {
   const [response, setResponse] = useState(null);
 
   const [sourceSearchBox, setSourceSearchBox] = useState(null);
@@ -36,6 +36,8 @@ const Map = ({destination,setDestination,source,setSource}) => {
       console.log(places[0].geometry)
       setSource(places[0].geometry.location);
       setCenter(places[0].geometry.location)
+      setLocationName(prevState=> prevState+"_" + places[0].name)
+
     }
   };
 
@@ -56,6 +58,7 @@ const Map = ({destination,setDestination,source,setSource}) => {
       console.log(places[0].geometry)
       setDestination(places[0].geometry.location);
       setCenter(places[0].geometry.location)
+      setLocationName(prevState=> prevState+"_"+places[0].name)
     }
   };
 
@@ -79,7 +82,7 @@ const Map = ({destination,setDestination,source,setSource}) => {
         {destination && <Marker position={destination} />}
 
         <>
-        {source !== '' && destination !== '' && (
+        {/* {source !== '' && destination !== '' && (
           <DirectionsService
             options={{
               destination: destination,
@@ -96,7 +99,7 @@ const Map = ({destination,setDestination,source,setSource}) => {
               directions: response
             }}
           />
-        )}
+        )} */}
 
         <StandaloneSearchBox
       onLoad={onSourceLoad}

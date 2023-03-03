@@ -200,11 +200,21 @@ const addRideSuccess=(payload)=>{
   };
 }
 
+/**
+ * 
+ */
 export const addRide=(contract,address,data)=>{
   return async (dispatch) => {
     try{
       console.log(data,address)
-      const tx = await contract.methods.createRide(data.source.longitude,data.source.latitude,data.destination.longitude,data.destination.latitude,data.time,Number(data.availableseats)).send({from:address});
+     
+      const tx = await contract.methods.createRide(
+        data.locationName,
+        data.source.longitude,
+        data.source.latitude,
+        data.destination.longitude,
+        data.destination.latitude,
+       data.time).send({from:address});
       console.log(tx)
       
     } catch(err){

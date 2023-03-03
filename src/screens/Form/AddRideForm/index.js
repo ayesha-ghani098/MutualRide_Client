@@ -20,6 +20,8 @@ const AddRide = () => {
   const [initialValues, setInitialValues] = React.useState(initState);
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
+  const [locationName, setLocationName] = useState("");
+
   console.log("sadjksakjdbsa")
   const onSubmit = (values, event) => {
     console.log("Values:::", values);
@@ -29,6 +31,7 @@ const AddRide = () => {
     // destination:{latitude:"",longitude:""}
     values.source = { latitude: ()=>source.lat(), longitude: ()=> source.lng()};
     values.destination = { latitude: destination.lat, longitude: destination.lng};
+    values.locationName=locationName;
     dispatch(addRide(web3.rideSharingContractObj, web3.wallet.address, values));
     //event.target.reset();
   };
@@ -85,7 +88,7 @@ const AddRide = () => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="Map">
 
-        <MapContainer source={source} destination={destination} setDestination={setDestination} setSource={setSource} />
+        <MapContainer setLocationName={setLocationName} locationName={locationName} source={source} destination={destination} setDestination={setDestination} setSource={setSource} />
         </Form.Group>
         <Button variant="primary" type="submit">
           Add a Ride
