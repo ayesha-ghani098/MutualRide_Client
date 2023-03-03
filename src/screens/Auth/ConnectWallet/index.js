@@ -11,7 +11,6 @@ import { connectWeb3 } from "../../../redux/web3/actions";
 
 // Components
 import { TextButton } from "../../../components/Buttons";
-import { HeadingTwo} from "../../../components/Text";
 import { Text } from "../../../components/Text";
 import Logo from "../../../components/Logo";
 
@@ -43,19 +42,23 @@ const ConnectWallet = () => {
     <div className={styles.container}>
       <div className={styles.left}>
         <div>
-          <Logo/>
-          <Text text="Share a ride, share the fun. Join our community of peer-to-peer ride sharing today!" />
-          <div className={styles.btnContainer}>
-          <TextButton
-            text="Connect With Wallet"
-            onClick={handleClick}
-            outline={false}
-          />
+          <Logo />
+          <Text text="Share the cost of your journey, Share a ride, share the fun. Join our community of peer-to-peer ride sharing today!" />
+          <div className={`img-fluid ${styles.btnContainer}`}>
+            <TextButton
+              text="Connect With Wallet"
+              onClick={handleClick}
+              outline={false}
+            />
           </div>
         </div>
       </div>
       <div className={styles.right}>
-        <img src={LandingPageImage} alt="landing page illustration" />
+        <img
+          className="img-fluid"
+          src={LandingPageImage}
+          alt="landing page illustration"
+        />
       </div>
     </div>
   );

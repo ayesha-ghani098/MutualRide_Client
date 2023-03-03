@@ -4,23 +4,32 @@
   justify-content: space-between;
   align-items: center;
   padding: 40px 100px;
+  height: 100vh;
 }
 .left{
-  padding-top: 20px
+  padding-top: 20px;
 }
 .left,.right{
   display: flex;
   align-items: center;
+  justify-content: center;
+padding-left: 40px;
+padding-right: 40px;
 }
 .right>img{
-  resize:both;
-  width: 700px;
+  width: 1200px;
 }
 .btnContainer{
   margin-top: 40px;
 }
 
-@media screen and (max-width: 480px) {
-
+@media screen and (max-width: 1200px) {
+  .container {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 40px;
+  }
 }
 

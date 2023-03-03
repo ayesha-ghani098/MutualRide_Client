@@ -1,21 +1,36 @@
 .container {
-    background: #6190e8;
-    background: -webkit-linear-gradient(to right, #a7bfe8, #6190e8);
-    background: linear-gradient(to right, #a7bfe8, #6190e8);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 100px;
+  height: 100vh;
+}
+.left {
+  padding-top: 20px;
+}
+.left,
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.right > img {
+  width: 1200px;
+}
+.btnContainer {
+  display: flex;
+  margin-top: 40px;
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
     display: flex;
-    justify-content: center;
+    flex-direction: column-reverse;
     align-items: center;
-    height: 100vh;
+    justify-content: center;
+    padding: 40px 40px;
   }
-  .centeredDiv {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-  }
-  .buttonContainer{
-display: flex;
-  }
-  
-  
+}

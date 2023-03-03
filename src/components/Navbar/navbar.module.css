@@ -1,0 +1,30 @@
+.navbar {
+  --bs-navbar-padding-x: 10px 20px;
+  background-color: #00b7f0;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 25px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.logo img {
+  margin-left: 20px;
+  width: 40px;
+  margin-right: 7px;
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(216deg)
+    brightness(104%) contrast(103%);
+}
+.switch {
+  color: white;
+}
+.icon {
+  margin-right: 15px;
+  cursor: pointer;
+}
