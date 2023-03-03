@@ -44,8 +44,6 @@ const ConnectWallet = () => {
       <div className={styles.left}>
         <div>
           <Logo/>
-          
-          <HeadingTwo text="Let's Get Started" />
           <Text text="Share a ride, share the fun. Join our community of peer-to-peer ride sharing today!" />
           <div className={styles.btnContainer}>
           <TextButton
