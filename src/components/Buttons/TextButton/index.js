@@ -1,17 +1,16 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 
+// Styles
 import styles from "./TextButton.module.css";
 
 const PrimaryButton = ({ text, onClick, outline }) => {
   return (
-    <Button
-      className={styles.textBtn}
+    <button
+      className={!outline ? styles.textBtn : styles.textBtnOutline}
       onClick={onClick}
-      variant={outline ? "outline-primary" : "primary"}
     >
       {text}
-    </Button>
+    </button>
   );
 };
 

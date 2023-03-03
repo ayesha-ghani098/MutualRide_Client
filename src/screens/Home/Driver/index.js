@@ -21,7 +21,7 @@ const DriverHome = () => {
     <>
       <Layout>
         <TextButton text="Add a Ride" onClick={handleNavigation} />
-        <Heading text="Requests" />
+        <Heading text="My Rides" />
         <RidesList type="Rides" data={mockDataRide} />
       </Layout>
     </>

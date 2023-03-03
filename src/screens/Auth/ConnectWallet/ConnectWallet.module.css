@@ -1,27 +1,26 @@
 .container {
-  background: #6190e8;
-  background: -webkit-linear-gradient(to right, #a7bfe8, #6190e8);
-  background: linear-gradient(to right, #a7bfe8, #6190e8);
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  height: 100vh;
+  padding: 40px 100px;
 }
-.centeredDiv {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+.left{
+  padding-top: 20px
 }
-.imgContainer {
+.left,.right{
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+}
+.right>img{
+  resize:both;
+  width: 700px;
+}
+.btnContainer{
+  margin-top: 40px;
 }
 
-.imgContainer img {
-  width: 90px;
+@media screen and (max-width: 480px) {
+
 }
 

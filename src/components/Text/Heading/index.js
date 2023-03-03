@@ -2,8 +2,11 @@ import React from "react";
 
 import styles from "./Heading.module.css";
 
-const HeadingText = ({ text }) => {
-  return <h3 className={styles.heading}>{text}</h3>;
+export const HeadingText = ({ text }) => {
+  return <h1 className={styles.heading}>{text}</h1>;
 };
 
-export default HeadingText;
+export const Heading2 = ({ text }) => {
+  return <h2 className={styles.heading}>{text}</h2>;
+};
+

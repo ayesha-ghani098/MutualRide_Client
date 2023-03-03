@@ -1,4 +1,17 @@
-.textBtn{
-    margin-right: 10px;
-    padding: 5px 20px;
+.textBtn {
+  padding: 7px 25px;
+  background-color: #00b7f0;
+  letter-spacing: 1px;
+  border-radius: 5px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.textBtnOutline {
+  padding: 7px 25px;
+  letter-spacing: 1px;
+  color: #00b7f0;
+  border-radius: 5px;
+  border: 1px solid #00b7f0;
+  cursor: pointer;
 }

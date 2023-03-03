@@ -7,7 +7,6 @@ import styles from "./Sidebar.module.css";
 import Logo from "../../assets/logo.png";
 
 const Sidebar = ({ show, handleClose, type }) => {
-  // TODO yhi nhi pta k dekhlo k type me aa kia rha or yhn check kia hurha
 
   return (
     <Offcanvas show={show} onHide={handleClose}>

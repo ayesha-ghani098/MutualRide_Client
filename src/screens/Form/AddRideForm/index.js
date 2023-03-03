@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
-import AddressPicker from "../../../components/AddressPicker";
 import { addRide } from "../../../redux/web3/actions";
 import Layout from "../../../components/Container";
 import { Heading } from "../../../components/Text";
@@ -56,23 +55,32 @@ const AddRide = () => {
       <Heading text="Add a Ride" />
       <Form onSubmit={handleSubmit(onSubmit, onError)}>
          {/* <AddressPicker/>  */}
-        <Form.Group className="mb-3" controlId="AvailableSeats">
-          <Form.Label>Available Seats</Form.Label>
+        <Form.Group className="mb-3" controlId="date">
+          <Form.Label>Date</Form.Label>
           <Form.Control
-            type="number"
-            placeholder="Enter available seats"
-            {...register("availableseats", {
-              required: "Available seats is required",
+            type="date"
+            placeholder="Enter Date"
+            {...register("date", {
+              required: "Date is required",
             })}
           />
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="Time">
           <Form.Label>Time</Form.Label>
           <Form.Control
             type="time"
             placeholder="Enter time"
             {...register("time", { required: "Time is required" })}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="fare">
+          <Form.Label>Fare</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter Fare"
+            {...register("fare", {
+              required: "Fare is required",
+            })}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="Map">

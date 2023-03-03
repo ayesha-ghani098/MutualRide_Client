@@ -1,23 +1,20 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { MdPeopleOutline } from "react-icons/md";
 
-import styles from "./RideCard.module.css"
+// Styles and Assets
+import styles from "./RideCard.module.css";
 import Avatar from "../../../assets/avatar.png";
+
+// Components
 import { TextButton } from "../../Buttons";
 
 const RequestCard = (props) => {
-  const { name, image, source, destination, requiredSeats } = props.ride;
-  console.log(props.ride)
+  const { name, image, source, destination } = props.ride;
+  
   const navigate = useNavigate();
 
-  const handleAccept = () => {
+  const handleStart = () => {
     // navigate to tracking
-  };
-
-  const handleDecline = () => {
-    // send notification to passenger
-    navigate("/passenger");
   };
 
   return (
@@ -32,13 +29,12 @@ const RequestCard = (props) => {
         <p>source: {source}</p>
         <p>destination: {destination} </p>
         <div className={styles.cardBottom}>
-          <div>
-            <MdPeopleOutline size={20} /> {requiredSeats}
-          </div>
+          <div>date : </div>
+          <div>Time:</div>
+          <div>Fare :</div>
         </div>
         <div className={styles.buttonContainer}>
-          <TextButton text="Accept" onClick={handleAccept} />
-          <TextButton text="Decline" onClick={handleDecline} />
+          <TextButton text="Start" onClick={handleStart} />
         </div>
       </div>
     </div>
