@@ -24,6 +24,8 @@ const PassengerHome = () => {
       const rides=await Promise.all(
         dataReq.map(
           async(i)=>{
+            let locArr = i.location.split("_");
+            console.log(locArr)
             const ride={
               id:i.rideId,
               address:i.creator,

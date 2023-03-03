@@ -29,7 +29,7 @@ const connectSuccess = (payload) => {
       dispatch(connectRequest());
    try{
     const walletAddress= await web3.eth.requestAccounts();
-    const RScontract=new web3.eth.Contract(ridesharingAbi.abi,'0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512');
+    const RScontract=new web3.eth.Contract(ridesharingAbi.abi,'0x5FbDB2315678afecb367f032d93F642f64180aa3');
     console.log(walletAddress,RScontract)
     let wallet={address: walletAddress[0]}
     let Ridercontract=new web3.eth.Contract(riderAbi,'0xEbBeBB565692c8A1F096643c9bc1cDf390Aebb1D');
@@ -200,11 +200,21 @@ const addRideSuccess=(payload)=>{
   };
 }
 
+/**
+ * 
+ */
 export const addRide=(contract,address,data)=>{
   return async (dispatch) => {
     try{
       console.log(data,address)
-      const tx = await contract.methods.createRide(data.source.longitude,data.source.latitude,data.destination.longitude,data.destination.latitude,data.time,Number(data.availableseats)).send({from:address});
+     
+      const tx = await contract.methods.createRide(
+        data.locationName,
+        data.source.longitude,
+        data.source.latitude,
+        data.destination.longitude,
+        data.destination.latitude,
+       data.time).send({from:address});
       console.log(tx)
       
     } catch(err){
