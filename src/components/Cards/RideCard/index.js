@@ -9,13 +9,14 @@ import Date from "../../../assets/calendar.png";
 import Money from "../../../assets/money.png";
 import Source from "../../../assets/source.png";
 import Destination from "../../../assets/destination.png";
+import Message from "../../../assets/message.png";
 
 // Components
 import { TextButton } from "../../Buttons";
 
 const RequestCard = (props) => {
   const { name, image, source, destination } = props.ride;
-  
+
   const navigate = useNavigate();
 
   const handleStart = () => {
@@ -30,15 +31,30 @@ const RequestCard = (props) => {
         alt="user-avatar"
       />
       <div className={styles.cardBody}>
-        <h5>{name}</h5>
-        <div className={styles.location}>
-        <p><img src={Source} alt="icon" /> {source}</p>
-        <p><img src={Destination} alt="icon" /> {destination} </p>
+        <div className={styles.info}>
+          <h5>{name}</h5>
+          <img src={Message} alt="icon" />
         </div>
+        <div className={styles.location}>
+          <p>
+            <img src={Source} alt="icon" /> {source}
+          </p>
+          <p>
+            <img src={Destination} alt="icon" />
+            {destination}
+          </p>
+        </div>
+
         <div className={styles.cardBottom}>
-          <div><img src={Date} alt="icon" /> date </div>
-          <div><img src={Time} alt="icon" /> Time</div>
-          <div><img src={Money} alt="icon" /> Fare</div>
+          <div>
+            <img src={Date} alt="icon" /> date{" "}
+          </div>
+          <div>
+            <img src={Time} alt="icon" /> Time
+          </div>
+          <div>
+            <img src={Money} alt="icon" /> Fare
+          </div>
         </div>
         <div className={styles.buttonContainer}>
           <TextButton text="Start Ride" onClick={handleStart} />
