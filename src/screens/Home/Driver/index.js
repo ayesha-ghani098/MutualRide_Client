@@ -1,12 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+// Styles
+import styles from "./driver.module.css";
+
 // Components
-import Sidebar from "../../../components/Sidebar";
 import { TextButton } from "../../../components/Buttons";
 import RidesList from "../../../components/List/RidesList";
 import Layout from "../../../components/Container";
-import { Heading } from "../../../components/Text";
+import { Heading, Text } from "../../../components/Text";
 
 import { mockDataRide } from "../../../utils/data";
 
@@ -20,7 +22,13 @@ const DriverHome = () => {
   return (
     <>
       <Layout>
-        <TextButton text="Add a Ride" onClick={handleNavigation} />
+        <div className={styles.addRide}>
+          <Text text="Get started with just one click add a ride now!" />
+        </div>
+        <div className={styles.addRide}>
+          <TextButton text="Add a Ride" onClick={handleNavigation} />
+        </div>
+
         <Heading text="My Rides" />
         <RidesList type="Rides" data={mockDataRide} />
       </Layout>

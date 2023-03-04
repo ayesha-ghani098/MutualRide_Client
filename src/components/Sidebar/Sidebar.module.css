@@ -1,28 +1,30 @@
+.sidebar{
+    background-color: #ddeef3;
+}
 .header{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-top: 20px;
 }
-.header img{
-    width: 43px;
-    height: 50px;
-}
-.title{
-    font-weight: bold;
-    padding-left: 4px;
-    font-size: 30px;
-}
+
+
 .link{
     text-decoration: none;
-    color: white;
-    background-color: #17262A;
-    display: block;
+    color: #00B7F0;
+    display: flex;
     margin-bottom: 10px;
     padding: 10px;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 20px;
+    align-items: center;
+}
+.link img{
+    width: 20px;
+    margin-right: 8px;
 }
 .link:hover{
-    color: white;
+    margin-bottom: 10px;
+    padding: 10px;
     letter-spacing: 1px;
 }
