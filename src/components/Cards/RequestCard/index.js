@@ -66,19 +66,19 @@ const RideCard = (props) => {
 
         <div className={styles.location}>
           <p>
-            <img src={Source} alt="icon" /> source
+            <img src={Source} alt="icon" /> source: {source}
           </p>
           <p>
             <img src={Destination} alt="icon" />
-            destination
+            destination: {destination}
           </p>
         </div>
         <div className={styles.cardBottom}>
           <div>
-            <img src={Date} alt="icon" /> date{" "}
+            <img src={Date} alt="icon" /> date: {date}
           </div>
           <div>
-            <img src={Time} alt="icon" /> Time
+            <img src={Time} alt="icon" /> Time: {startTime}
           </div>
           <div>
             <img src={Money} alt="icon" /> {costPerKm}

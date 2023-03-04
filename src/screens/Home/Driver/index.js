@@ -56,7 +56,7 @@ const DriverHome = () => {
     <>
       <Layout>
       <button onClick={getMessages}>Get Message (see in console)</button>
-        <button onClick={() => sendMessage("hello", i++)}>
+        <button onClick={() => sendMessage("kdsakjdsakjd", i++)}>
           send msg to firebase
         </button>
         <div className={styles.addRide}>

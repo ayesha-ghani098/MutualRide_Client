@@ -89,7 +89,7 @@ const AddRide = () => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="Map">
 
-        <MapContainer setLocationName={setLocationName} locationName={locationName} source={source} destination={destination} setDestination={setDestination} setSource={setSource} />
+        <MapContainer search={true} setLocationName={setLocationName} locationName={locationName} source={source} destination={destination} setDestination={setDestination} setSource={setSource} />
         </Form.Group>
         <Button variant="primary" type="submit">
           Add a Ride
