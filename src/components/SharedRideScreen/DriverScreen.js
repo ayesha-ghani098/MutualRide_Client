@@ -1,48 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { fbIns as firebase } from '../../firebase/firebaseIns';
-import { GoogleMap, LoadScript, DirectionsService, DirectionsRenderer, Marker } from '@react-google-maps/api';
+import { db as firebase }  from '../../firebase/firebaseIns';
+import GoogleMap from "../../screens/Form/AddRideForm/googleMap"
 
 const DriverMap = ({ driverId, destination }) => {
-  const [driverLocation, setDriverLocation] = useState({ lat: 0, lng: 0 });
-  const [directions, setDirections] = useState(null);
+  destination={
+    lat: 37.7749,
+    lng: -122.4194,
+  }
 
-  useEffect(() => {
-    const driverLocationRef = firebase.database().ref(`drivers/${driverId}/location`);
-    driverLocationRef.on('value', (snapshot) => {
-      const location = snapshot.val();
-      setDriverLocation({ lat: location.latitude, lng: location.longitude });
-    });
+  const [center,setCenter] = useState({
+    lat: 37.7749,
+    lng: -122.4194,
+  });
+  // useEffect(() => {
+  //   const driverLocationRef = firebase.database().ref(`drivers/${driverId}/location`);
+  //   driverLocationRef.on('value', (snapshot) => {
+  //     const location = snapshot.val();
+  //     setDriverLocation({ lat: location.latitude, lng: location.longitude });
+  //   });
 
-    return () => {
-      driverLocationRef.off('value');
-    };
-  }, [firebase, driverId]);
+  //   return () => {
+  //     driverLocationRef.off('value');
+  //   };
+  // }, [firebase, driverId]);
 
-  const directionsCallback = (response) => {
-    if (response !== null) {
-      setDirections(response);
-    }
-  };
+  // const directionsCallback = (response) => {
+  //   if (response !== null) {
+  //     setDirections(response);
+  //   }
+  // };
 
   return (
-    <LoadScript googleMapsApiKey="YOUR_API_KEY">
-      <GoogleMap center={driverLocation} zoom={15}>
-        <Marker position={driverLocation} />
+   <GoogleMap destination={destination} source={center}/>
 
-        {destination && (
-          <DirectionsService
-            options={{
-              destination,
-              origin: driverLocation,
-              travelMode: 'DRIVING',
-            }}
-            callback={directionsCallback}
-          />
-        )}
-
-        {directions && <DirectionsRenderer directions={directions} />}
-      </GoogleMap>
-    </LoadScript>
   );
 };
 
