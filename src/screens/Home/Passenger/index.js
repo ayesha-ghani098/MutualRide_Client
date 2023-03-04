@@ -22,6 +22,8 @@ const PassengerHome = () => {
         console.log(dataReq);
         const rides = await Promise.all(
           dataReq.map(async (i) => {
+
+
             let locArr = i.location.split("_");
             let timeArr = i.StartTime.split("_");
             console.log(locArr);
@@ -39,7 +41,10 @@ const PassengerHome = () => {
               destination: locArr[2],
               image: "",
               name: "Ayesha Ghani",
-              rideId: "",
+              rideId: i.rideId,
+              fare:i.fair,
+              isPayed:false,
+              state:i.currState
             };
             return ride;
           })
