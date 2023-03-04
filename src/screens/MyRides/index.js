@@ -13,15 +13,44 @@ const MyRides = () => {
 
    useEffect(()=>{
     async function fetch(){
-      if(params[1]=="driver"){
-        let tx = await web3.rideSharingContractObj.methods.getRidesByDriver(web3.user.driverId).call()
-        console.log(tx)
-      }
-        else if(params[1]=="passenger") {
-           let tx = await web3.rideSharingContractObj.methods.getRidesByRiderId(web3.user.riderId).call()
-           console.log(tx)
+    
+      if(web3.isDriver)
+      {
+        let dataReq = await web3.rideSharingContractObj.methods.getRidesByRiderId(web3.user.riderId).call()
 
-          }
+          const rides = await Promise.all(
+            dataReq.map(async (i) => {
+  
+  
+              let locArr = i.location.split("_");
+              let timeArr = i.StartTime.split("_");
+              console.log(locArr);
+              const ride = {
+                id: i.rideId,
+                address: i.creator,
+                startTime: timeArr[1],
+                date: timeArr[0],
+                requiredSeats: i.seats,
+                sourceLong: i.sourceLong,
+                sourceLat: i.sourceLat,
+                destLong: i.destLong,
+                destLat: i.destLat,
+                source: locArr[1],
+                destination: locArr[2],
+                image: "",
+                name: "Ayesha Ghani",
+                rideId: i.rideId,
+                fare:i.fair,
+                isPayed:false,
+                state:i.currState
+              };
+              return ride;
+            })
+          );
+           console.log(rides)
+          setRides(rides);
+        }
+    
     }
     fetch()
 
