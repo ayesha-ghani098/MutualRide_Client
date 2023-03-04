@@ -10,12 +10,15 @@ import Layout from "../../../components/Container";
 import { Heading } from "../../../components/Text";
 import { Heading2 } from "../../../components/Text/Heading";
 import InfoItem from "../InfoItem";
+import EditProfile from "../../../components/modals/EditProfileDriver";
+import {TextButton} from "../../../components/Buttons"
 
 const DriverProfile = () => {
+  const [show,setShow] = useState(false);
   const [image, setImage] = useState({ preview: "", raw: "" });
 
   const web3 = useSelector((state) => state.web3);
-  console.log("user",web3.userObj)
+  
 
   const handleChange = (e) => {
     if (e.target.files.length) {
@@ -27,8 +30,13 @@ const DriverProfile = () => {
     console.log(e.target.files[0], URL.createObjectURL(e.target.files[0]));
   };
   return (
+    <>
     <Layout>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
       <Heading text="Profile" />
+      <TextButton text="Edit Profile"onClick={()=>setShow(true)} />
+      </div>
+      
       <div className={styles.profileSection}>
         <div className={styles.left}>
           <div className={styles.avatarContainer}>
@@ -67,6 +75,11 @@ const DriverProfile = () => {
         </div>
       </div>
     </Layout>
+    {
+      // TODO YAHAN USER KA DATA PASS KRNA H FOR INITIAL STATE
+show && <EditProfile show={show} onHide={()=>setShow(false)} />
+    }
+    </>
   );
 };
 
