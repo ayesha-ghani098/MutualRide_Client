@@ -5,10 +5,12 @@ import { useSelector } from "react-redux";
 import RidesList from "../../../components/List/RidesList";
 import Layout from "../../../components/Container";
 import { Heading } from "../../../components/Text";
+import { Heading2 } from "../../../components/Text/Heading";
 
 const PassengerHome = () => {
   const web3 = useSelector((state) => state.web3);
 
+  const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -49,11 +51,33 @@ const PassengerHome = () => {
     fetchRides();
   }, [web3]);
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const regex = new RegExp(`\\b${searchTerm}`, "i");
+  const filteredItems = data.filter((item) => regex.test(item.location));
+
+  const displayItems = searchTerm.length === 0 ? data : filteredItems;
+
   return (
     <>
       <Layout>
         <Heading text="Nearby Rides" />
-        <RidesList type="Requests" data={data} />
+        {data.length !== 0 ? (
+          <div>
+            <input
+              type="text"
+              placeholder="Search..."
+              onChange={handleSearch}
+            />
+            <RidesList type="Requests" data={displayItems} />
+          </div>
+        ) : (
+          <div>
+            <Heading2 text="Sorry! No Rides Available" />
+          </div>
+        )}
       </Layout>
     </>
   );
