@@ -80,7 +80,7 @@ const connectSuccess = (payload) => {
         }
 
         }
-        else if(user.user_type_id==2){
+        else if(user.user_type_id===2){
           console.log("herer")
 
           user.user_type="rider"  

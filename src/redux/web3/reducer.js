@@ -15,8 +15,6 @@ const initState = {
     user:false,
     selectedUser:null,
     anyRideInRunningAsDriver:true
-    
-
 }
 
 const web3Reducer = (state=initState, action) => {
