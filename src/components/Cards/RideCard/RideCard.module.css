@@ -1,25 +1,53 @@
 .card {
   display: flex;
   padding: 15px;
-  margin: 20px 0;
-  box-shadow: 5px 5px 10px #aaaaaa;
   margin: 20px;
+  box-shadow: 5px 5px 10px #aaaaaa;
   border-radius: 10px;
+  width: 400px;
 }
 .avatar {
   width: 60px;
   height: 60px;
   margin-right: 10px;
 }
-.cardBody h6 {
+.cardBody {
+  width: 100%;
+}
+.cardBody h5 {
+  margin-top: 5px;
   padding-top: 5px;
-  line-height: 0.9;
+  line-height: 1;
+  font-weight: 600;
+  padding-left: 5px;
 }
 .cardBody p {
-  line-height: 0.5;
+  margin-top: -15px;
+  font-size: 16px;
+}
+.cardBody img {
+  width: 20px;
+  height: 20px;
+}
+.cardBottom {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.location {
+  margin-top: 30px;
+}
+.cardBottom div img {
+  margin-right: 5px;
 }
 
 .cardBottom div {
-  margin-top: 0;
-  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+.buttonContainer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }

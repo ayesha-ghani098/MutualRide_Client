@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 // Styles and Assets
 import styles from "./RideCard.module.css";
 import Avatar from "../../../assets/avatar.png";
+import Time from "../../../assets/time.png";
+import Date from "../../../assets/calendar.png";
+import Money from "../../../assets/money.png";
+import Source from "../../../assets/source.png";
+import Destination from "../../../assets/destination.png";
 
 // Components
 import { TextButton } from "../../Buttons";
@@ -25,16 +30,18 @@ const RequestCard = (props) => {
         alt="user-avatar"
       />
       <div className={styles.cardBody}>
-        <h6>{name}</h6>
-        <p>source: {source}</p>
-        <p>destination: {destination} </p>
+        <h5>{name}</h5>
+        <div className={styles.location}>
+        <p><img src={Source} alt="icon" /> {source}</p>
+        <p><img src={Destination} alt="icon" /> {destination} </p>
+        </div>
         <div className={styles.cardBottom}>
-          <div>date : </div>
-          <div>Time:</div>
-          <div>Fare :</div>
+          <div><img src={Date} alt="icon" /> date </div>
+          <div><img src={Time} alt="icon" /> Time</div>
+          <div><img src={Money} alt="icon" /> Fare</div>
         </div>
         <div className={styles.buttonContainer}>
-          <TextButton text="Start" onClick={handleStart} />
+          <TextButton text="Start Ride" onClick={handleStart} />
         </div>
       </div>
     </div>

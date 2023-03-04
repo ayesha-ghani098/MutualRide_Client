@@ -1,18 +1,22 @@
 import React from "react";
-import { RequestCard, RideCard } from "../../Cards";
+import { RequestCard, RideCard,MyRideCard } from "../../Cards";
 const RidesList = ({ data, type }) => {
   console.log(data)
 
   return (
-    <>
+    <div style={{display:"flex",flexWrap:"wrap"}}>
       {type === "Rides"
         ? data.map((item) => {
             return <RequestCard key={item.id} ride={item} />;
           })
-        : data.map((item) => {
+        : type === "Requests"? data.map((item) => {
             return <RideCard key={item.id} request={item} />;
-          })}
-    </>
+          })
+        : data.map((item) => {
+          return <MyRideCard key={item.id} data={item} />;
+        })
+        }
+    </div>
   );
 };
 

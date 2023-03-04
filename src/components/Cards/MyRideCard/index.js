@@ -2,7 +2,7 @@ import React from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
 
 // Styles and Assets
-import styles from "./RequestCard.module.css";
+import styles from "./MyRideCard.module.css";
 import Avatar from "../../../assets/avatar.png";
 import Time from "../../../assets/time.png";
 import Date from "../../../assets/calendar.png";
@@ -26,7 +26,7 @@ const RideCard = (props) => {
     destLat,
     startTime,
     costPerKm,
-  } = props.request;
+  } = props.data;
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -64,7 +64,7 @@ const RideCard = (props) => {
           <div><img src={Money} alt="icon" /> {costPerKm}</div>
         </div>
         <div className={styles.buttonContainer}>
-          <TextButton text="Join the ride" onClick={handleJoin} />
+          <TextButton text="Completed" disabled={true} />
         </div>
       </div>
     </div>
