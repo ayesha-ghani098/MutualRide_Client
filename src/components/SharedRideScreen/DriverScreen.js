@@ -1,37 +1,43 @@
 import React, { useEffect, useState } from 'react';
-import { db as firebase }  from '../../firebase/firebaseIns';
+import { db }  from '../../firebase/firebaseIns';
+import { onValue, ref } from "firebase/database";
+
 import GoogleMap from "../../screens/Form/AddRideForm/googleMap"
 
 const DriverMap = ({ driverId, destination }) => {
+  
   destination={
     lat: 37.7749,
     lng: -122.4194,
   }
-
+  const [destinatison,setDriverLocation] = useState({
+    lat: 37.7749,
+    lng: -122.4194,
+  });
   const [center,setCenter] = useState({
     lat: 37.7749,
     lng: -122.4194,
   });
-  // useEffect(() => {
-  //   const driverLocationRef = firebase.database().ref(`drivers/${driverId}/location`);
-  //   driverLocationRef.on('value', (snapshot) => {
-  //     const location = snapshot.val();
-  //     setDriverLocation({ lat: location.latitude, lng: location.longitude });
-  //   });
+  const [projects, setProjects] = useState([]);
 
-  //   return () => {
-  //     driverLocationRef.off('value');
-  //   };
-  // }, [firebase, driverId]);
+    useEffect(() => {
+      const query = ref(db, "projects");
+      return onValue(query, (snapshot) => {
+        const data = snapshot.val();
+  
+        if (snapshot.exists()) {
+          Object.values(data).map((project) => {
+            console.log(data)
+            setProjects((projects) => [...projects, project]);
+          });
+        }
+      });
+    }, []);
 
-  // const directionsCallback = (response) => {
-  //   if (response !== null) {
-  //     setDirections(response);
-  //   }
-  // };
+
 
   return (
-   <GoogleMap destination={destination} source={center}/>
+   <GoogleMap search={false} destination={destination} source={center}/>
 
   );
 };

@@ -14,7 +14,7 @@ const containerStyle = {
 
 
 const libraries=["places"]
-const Map = ({setLocationName, locationName, destination,setDestination,source,setSource}) => {
+const Map = ({search,setLocationName, locationName, destination,setDestination,source,setSource}) => {
   const [response, setResponse] = useState(null);
 
   const [sourceSearchBox, setSourceSearchBox] = useState(null);
@@ -101,7 +101,8 @@ const Map = ({setLocationName, locationName, destination,setDestination,source,s
           />
         )}
 
-        <StandaloneSearchBox
+ {search && ( <>
+     <StandaloneSearchBox
       onLoad={onSourceLoad}
       onPlacesChanged={onSourceChanged}
       style={{ marginBottom: '10px' }}
@@ -150,7 +151,7 @@ const Map = ({setLocationName, locationName, destination,setDestination,source,s
           transform: 'translateX(-50%)',
         }}
       />
-    </StandaloneSearchBox>
+    </StandaloneSearchBox></>)}
         </>
       </GoogleMap>
     </LoadScript>
