@@ -82,7 +82,7 @@ const Map = ({setLocationName, locationName, destination,setDestination,source,s
         {destination && <Marker position={destination} />}
 
         <>
-        {/* {source !== '' && destination !== '' && (
+        {source !== '' && destination !== '' && (
           <DirectionsService
             options={{
               destination: destination,
@@ -99,7 +99,7 @@ const Map = ({setLocationName, locationName, destination,setDestination,source,s
               directions: response
             }}
           />
-        )} */}
+        )}
 
         <StandaloneSearchBox
       onLoad={onSourceLoad}
