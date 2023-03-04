@@ -37,6 +37,8 @@ const web3Reducer = (state=initState, action) => {
             console.log(action.payload)
             return {
                 ...state,
+                isDriver: action.payload.isDriver,
+                isRider: action.payload.isRider,
                 wallet: action.payload.wallet,
                 rideSharingContractObj:action.payload.RScontract,
                 riderContractObj:action.payload.Ridercontract,
@@ -50,6 +52,7 @@ const web3Reducer = (state=initState, action) => {
             };
             case "DRIVER_SUCCESS":
                 return{
+                    ...state,
                     driverId:action.payload.driverId,
                     isDriver:true
                 }

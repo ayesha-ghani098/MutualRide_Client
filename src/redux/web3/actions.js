@@ -47,6 +47,8 @@ const connectSuccess = (payload) => {
   console.log("herer")
     let user={user_type:null,user_type_id:0};
     let userInfo = userType;
+    let isDriver=false;
+    let isRider=false;
 
     console.log("herer")
 
@@ -70,6 +72,7 @@ const connectSuccess = (payload) => {
          user.driverId=userInfo[1]
          user.registered=true;
          user.isDriver = true;
+         isDriver = true
          user.isRider=false;
         let tx = await RScontract.methods.idToDriver(user.driverId).call();
         console.log(tx)
@@ -88,6 +91,7 @@ const connectSuccess = (payload) => {
         user.registered=true;
         user.isDriver = false;
         user.isRider=true;
+        isRider=true;
         console.log("herer")
 
         let tx = await RScontract.methods.idToDriver(user.riderId).call();
@@ -106,6 +110,8 @@ const connectSuccess = (payload) => {
          user.registered=true;
          user.isDriver = true;
          user.isRider=true;
+         isRider=true
+         isDriver=true
          console.log("herer")
 
          let tx = await RScontract.methods.idToRider(user.riderId).call();
@@ -131,6 +137,9 @@ const connectSuccess = (payload) => {
 
     dispatch( 
       connectSuccess({  
+
+        isDriver,
+        isRider,
         wallet,
         RScontract,
         Ridercontract,
