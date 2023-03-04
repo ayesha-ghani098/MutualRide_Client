@@ -24,7 +24,8 @@ const DriverMap = ({ driverId, destination }) => {
       const query = ref(db, "projects");
       return onValue(query, (snapshot) => {
         const data = snapshot.val();
-  
+        console.log(snapshot)
+
         if (snapshot.exists()) {
           Object.values(data).map((project) => {
             console.log(data)
