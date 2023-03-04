@@ -40,14 +40,14 @@ const RegisterDriver = () => {
      else  if(web3.user.isDriver){
         navigate("/Driver")
       }
-    },[])
+    },[web3.user])
   const onSubmit = async (values, event) => {
     console.log("Values::", values);
    let a = await dispatch(
       registerDriver(web3.rideSharingContractObj, web3.wallet.address, values)
     );
     // event.target.reset();
-    navigate("/driver")
+   if(web3.isDriver)navigate("/driver")
   };
 
   const onError = (error) => {
