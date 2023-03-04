@@ -1,15 +1,15 @@
 import React from "react";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate} from "react-router-dom";
+
 
 // Styles and Assets
-import styles from "./MyRideCard.module.css";
+import styles from "../RideCard.module.css";
 import Avatar from "../../../assets/avatar.png";
 import Time from "../../../assets/time.png";
 import Date from "../../../assets/calendar.png";
 import Money from "../../../assets/money.png";
 import Source from "../../../assets/source.png";
 import Destination from "../../../assets/destination.png";
-import Message from "../../../assets/message.png";
 
 // Components
 import { TextButton } from "../../Buttons";
@@ -55,7 +55,6 @@ const RideCard = (props) => {
       <div className={styles.cardBody}>
         <div className={styles.info}>
           <h5>{name}</h5>
-          <img src={Message} alt="icon" />
         </div>
         <div className={styles.location}>
           <p>

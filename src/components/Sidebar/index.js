@@ -26,7 +26,7 @@ const Sidebar = ({ show, handleClose, type }) => {
               <img src={Home} alt="icon"/>
               Home
             </Link>
-            <Link className={styles.link} to="">
+            <Link className={styles.link} to="profile">
             <img src={User} alt="icon" />
               My Profile
             </Link>
@@ -45,7 +45,7 @@ const Sidebar = ({ show, handleClose, type }) => {
             <img src={Home} alt="icon" />
               Home
             </Link>
-            <Link className={styles.link} to="">
+            <Link className={styles.link} to="profile">
             <img src={User} alt="icon" />
               My Profile
             </Link>

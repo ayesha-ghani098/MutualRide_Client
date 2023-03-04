@@ -7,7 +7,7 @@ import Protected from "../ProtectedRoutes";
 // Components
 import DriverHome from "../../screens/Home/Driver";
 import PassengerHome from "../../screens/Home/Passenger";
-import { AddRide, RequestRide } from "../../screens/Form";
+import { AddRide } from "../../screens/Form";
 import MyRides from "../../screens/MyRides";
 import {
   ConnectWallet,
@@ -18,10 +18,12 @@ import {
 import Dashboard from "../../screens/Dashboard";
 import PassengerTracking from "../../screens/Tracking/Passenger";
 import DriverTracking from "../../screens/Tracking/Driver";
+import PassengerProfile from "../../screens/Profile/Passenger";
+import DriverProfile from "../../screens/Profile/Driver";
 
 let user = true;
 
-const AppRoutes = ({web3}) => {
+const AppRoutes = ({ web3 }) => {
   return (
     <BrowserRouter>
       <Routes>
@@ -53,6 +55,15 @@ const AppRoutes = ({web3}) => {
             element={
               <Protected isSignedIn={user}>
                 <MyRides />
+              </Protected>
+            }
+          />
+          <Route
+            index
+            path="profile"
+            element={
+              <Protected isSignedIn={user}>
+                <DriverProfile />
               </Protected>
             }
           />
@@ -99,10 +110,10 @@ const AppRoutes = ({web3}) => {
           />
           <Route
             index
-            path="request-ride"
+            path="profile"
             element={
               <Protected isSignedIn={user}>
-                <RequestRide />
+                <PassengerProfile />
               </Protected>
             }
           />
