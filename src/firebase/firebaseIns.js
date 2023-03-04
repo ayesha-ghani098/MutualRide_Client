@@ -4,13 +4,14 @@ import { getDatabase } from "firebase/database";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDZt2cDht3N1klDZzq_4BPWpMcsdOS0Ars",
-  authDomain: "mutualride-c7529.firebaseapp.com",
-  projectId: "mutualride-c7529",
-  storageBucket: "mutualride-c7529.appspot.com",
-  messagingSenderId: "277400908128",
-  appId: "1:277400908128:web:0aec0aed603ccaa3ed6e05",
-  measurementId: "G-SH6J136Y8D"
+  apiKey: "AIzaSyARAnXsQLNzeE44fDk96eqzuSAuW3Bio_8",
+  authDomain: "beautifulfyp-6eca0.firebaseapp.com",
+  databaseURL: "https://beautifulfyp-6eca0-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "beautifulfyp-6eca0",
+  storageBucket: "beautifulfyp-6eca0.appspot.com",
+  messagingSenderId: "423400004949",
+  appId: "1:423400004949:web:4222f86e672c3396f4a3dc",
+  measurementId: "G-PLYQ9CW1JE"
 };
 
 // Initialize Firebase
