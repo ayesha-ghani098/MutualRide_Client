@@ -14,7 +14,19 @@ import Destination from "../../../assets/destination.png";
 import { TextButton } from "../../Buttons";
 
 const RequestCard = (props) => {
-  const { name, image, source, destination } = props.ride;
+  const {    id,
+    name,
+    image,
+    sourceLat,
+    sourceLong,
+    destLong,
+    destLat,
+    startTime,
+    costPerKm,
+    source,
+    destination,
+    fare,
+    date} = props.ride;
 
   const navigate = useNavigate();
 
@@ -45,13 +57,13 @@ const RequestCard = (props) => {
 
         <div className={styles.cardBottom}>
           <div>
-            <img src={Date} alt="icon" /> date
+            <img src={Date} alt="icon" /> date: {date}
           </div>
           <div>
-            <img src={Time} alt="icon" /> Time
+            <img src={Time} alt="icon" /> Time: {startTime}
           </div>
           <div>
-            <img src={Money} alt="icon" /> Fare
+            <img src={Money} alt="icon" /> Fare: {fare}
           </div>
         </div>
         <div className={styles.buttonContainer}>
