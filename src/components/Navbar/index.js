@@ -23,6 +23,7 @@ const NavBar = ({ handleShow }) => {
 
   return (
     <Navbar className={styles.navbar} collapseOnSelect expand="md">
+      <div style={{padding:"0 30px",width:"100%",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
       <Navbar.Brand>
         <div className={styles.logo}>
           <HiOutlineMenuAlt2
@@ -36,7 +37,7 @@ const NavBar = ({ handleShow }) => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto"></Nav>
-        <Nav>
+        <Nav style={{justifySelf:"flex-end"}}>
           <Form>
             <Form.Check
               type="switch"
@@ -48,6 +49,7 @@ const NavBar = ({ handleShow }) => {
           </Form>
         </Nav>
       </Navbar.Collapse>
+      </div>
     </Navbar>
   );
 };
