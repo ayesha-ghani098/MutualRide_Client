@@ -11,11 +11,11 @@ const MyRides = () => {
    useEffect(()=>{
     async function fetch(){
       if(params[1]=="driver"){
-        let tx = await web3.rideSharingContractObj.methods.getRidesByRiderId()
+        let tx = await web3.rideSharingContractObj.methods.getRidesByDriver(web3.user.driverId).call()
         console.log(tx)
       }
         else if(params[1]=="passenger") {
-           let tx = await web3.rideSharingContractObj.methods.getRidesByDriver()
+           let tx = await web3.rideSharingContractObj.methods.getRidesByRiderId(web3.user.riderId).call()
            console.log(tx)
 
           }

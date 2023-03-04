@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-
+import { useSelector } from "react-redux";
+import AlertMessage from "./components/Alert/index"
 // Web3
 import Web3 from "web3";
 
@@ -11,7 +12,15 @@ import { connectWeb3 } from "./redux/web3/actions";
 import AppRoutes from "./route/AppRoutes/appRoutes";
 
 const App = () => {
+
+  const web3 = useSelector(state=>state.web3)
   const dispatch = useDispatch();
+ let anyRideInRunning = true;
+ let runningRide={
+  id: 0,
+  passengerId:1,
+  riderId:1
+}
 
   useEffect(() => {
     const checkConnection = async () => {
@@ -33,10 +42,12 @@ const App = () => {
         }
       });
     };
-    checkConnection();
-  }, []);
 
-  return <AppRoutes />;
+    checkConnection();
+   
+  }, []);
+  AlertMessage("sds")
+  return <AppRoutes web3={web3} />;
 };
 
 export default App;

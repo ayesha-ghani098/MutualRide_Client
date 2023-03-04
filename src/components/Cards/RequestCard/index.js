@@ -21,6 +21,9 @@ const RideCard = (props) => {
     destLat,
     startTime,
     costPerKm,
+    source,
+    destination,
+    date
   } = props.request;
   const navigate = useNavigate();
 
@@ -49,15 +52,14 @@ const RideCard = (props) => {
       />
       <div className={styles.cardBody}>
         <h6>{name}</h6>
-        <p>source: {sourceLat + ", " + sourceLong}</p>
-        <p>destination: {destLat + ", " + destLong}</p>
+        <p>source: {source}</p>
+        <p>destination: {destination}</p>
         <div className={styles.cardBottom}>
           <div>
             <AiOutlineFieldTime />
             {startTime}
           </div>
-          <div>date : </div>
-          <div>price:</div>
+          <div>date : {date}</div>
           <div>Cost {costPerKm}</div>
           <div className={styles.buttonContainer}>
             <TextButton text="Join the ride" onClick={handleJoin} />

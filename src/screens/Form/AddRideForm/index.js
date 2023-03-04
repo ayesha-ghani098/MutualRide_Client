@@ -32,6 +32,7 @@ const AddRide = () => {
     values.source = { latitude: ()=>source.lat(), longitude: ()=> source.lng()};
     values.destination = { latitude: destination.lat, longitude: destination.lng};
     values.locationName=locationName;
+    values.time = values.date+"_"+values.time
     dispatch(addRide(web3.rideSharingContractObj, web3.wallet.address, values));
     //event.target.reset();
   };

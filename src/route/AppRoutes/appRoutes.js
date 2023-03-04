@@ -21,7 +21,7 @@ import DriverTracking from "../../screens/Tracking/Driver";
 
 let user = true;
 
-const AppRoutes = (props) => {
+const AppRoutes = ({web3}) => {
   return (
     <BrowserRouter>
       <Routes>
@@ -76,7 +76,7 @@ const AppRoutes = (props) => {
         <Route
           path="/passenger"
           element={
-            <Protected isSignedIn={user}>
+            <Protected isSignedIn={web3.user.isRider}>
               <Dashboard />
             </Protected>
           }
@@ -92,7 +92,7 @@ const AppRoutes = (props) => {
           <Route
             path="tracking"
             element={
-              <Protected isSignedIn={user}>
+              <Protected isSignedIn={web3.anyRideInRunning}>
                 <PassengerTracking />
               </Protected>
             }

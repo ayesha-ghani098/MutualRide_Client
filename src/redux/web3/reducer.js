@@ -13,7 +13,9 @@ const initState = {
     isRider:false,
     riderId:null,
     user:false,
-    selectedUser:null
+    selectedUser:null,
+    anyRideInRunningAsDriver:true
+    
 
 }
 

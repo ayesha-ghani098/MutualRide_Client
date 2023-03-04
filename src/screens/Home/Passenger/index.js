@@ -25,18 +25,20 @@ const PassengerHome = () => {
         dataReq.map(
           async(i)=>{
             let locArr = i.location.split("_");
+            let timeArr = i.StartTime.split("_")
             console.log(locArr)
             const ride={
               id:i.rideId,
               address:i.creator,
-              startTime:i.StartTime,
+              startTime:timeArr[1],
+              date: timeArr[0],
               requiredSeats:i.seats,
               sourceLong:i.sourceLong,
               sourceLat:i.sourceLat,
               destLong:i.destLong,
               destLat:i.destLat,
-              source:"",
-              destination:"",
+              source:locArr[1],
+              destination:locArr[2],
               image:"",
               name:"Ayesha Ghani",
               rideId:""
