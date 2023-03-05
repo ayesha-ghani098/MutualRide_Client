@@ -4,41 +4,23 @@ import { onValue, ref } from "firebase/database";
 
 import GoogleMap from "../../screens/Form/AddRideForm/googleMap"
 
-const DriverMap = ({ driverId, destination }) => {
+const DriverMap = ({ source, destination }) => {
   
-  destination={
+  let a={
     lat: 37.7749,
     lng: -122.4194,
   }
-  const [destinatison,setDriverLocation] = useState({
-    lat: 37.7749,
-    lng: -122.4194,
-  });
+
   const [center,setCenter] = useState({
     lat: 37.7749,
     lng: -122.4194,
   });
-  const [projects, setProjects] = useState([]);
 
-    useEffect(() => {
-      const query = ref(db, "projects");
-      return onValue(query, (snapshot) => {
-        const data = snapshot.val();
-        console.log(snapshot)
-
-        if (snapshot.exists()) {
-          Object.values(data).map((project) => {
-            console.log(data)
-            setProjects((projects) => [...projects, project]);
-          });
-        }
-      });
-    }, []);
-
+  console.log(source, center)
 
 
   return (
-   <GoogleMap search={false} destination={destination} source={center}/>
+   <GoogleMap search={false} destination={destination} source={source}/>
 
   );
 };

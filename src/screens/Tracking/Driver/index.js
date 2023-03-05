@@ -1,18 +1,91 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { ref, set,onValue } from "firebase/database";
+import { db } from "../../../firebase/firebaseIns";
 
 // Components
 import AlertMessage from "../../../components/Alert";
 import DriverMap from "../../../components/SharedRideScreen/DriverScreen";
+import { getLocation } from "../../../utils/geoLocation";
 
-const DriverTracking = () => {
-  const [status, setStatus] = useState("");
+const DriverTracking = ({showAlert,myId,otherId}) => {
+  const [status, setStatus] = useState();
+  const [mylocation,setmyLocation]=useState({
+    "lat": 24.9644782,
+    "lng": 67.0715994
+})
+  const [otherlocation,setOtherLocation]=useState({
+    "lat": 24.9644782,
+    "lng": 67.0715994
+})
+
   // routes bh add krdiye hyn tracking k dekhlena 
+    // FIREBASE ADD DATA REMOVE IT LATER
+    
+    // getLocation(setLocation);
+    // setInterval(function() {
+    //  getLocation(setLocation);
+     
+    // console.log('This function will run every 5 seconds',location);
+    // }, 10000);
+    useEffect(() => {
+      sendMessage(myId)
+      getMessages(otherId);
+      const interval = setInterval(() => {
+           getLocation(setmyLocation);
+           sendMessage(myId)
+           getMessages(otherId);  
+
+
+    console.log('This function will run every 5 seconds');
+      }, 20000);
+      return () => clearInterval(interval);
+    }, []);
+   
+
+
+    const sendMessage = ( id) => {
+      console.log(mylocation)
+      set(ref(db, "users/" + id), {
+        location: mylocation
+        ,
+      })
+        .then(() => {
+          console.log("successfully done");
+        })
+        .catch((err) => {
+          console.log("err", err);
+        });
+    };
+  
+     // FIREBASE READ DATA REMOVE IT LATER
+     const getMessages = (id) => {
+  
+      const messagesRef = ref(db, 'users/'+id);
+  
+      // Fetch the data
+      onValue(messagesRef, (snapshot) => {
+        const messageList = [];
+        snapshot.forEach((childSnapshot) => {
+          const childData = childSnapshot.val();
+          messageList.push(childData);
+        });
+        console.log(messageList)
+        setOtherLocation(messageList[0])
+      });
+    };
+
   return (
     <div>
-      <DriverMap/>
-      {status !== "" && <AlertMessage message={status} />}
+
+      {showAlert? <AlertMessage message={status} />:
+        <>
+              <DriverMap source={mylocation} destination={otherlocation} />
       {/* button change krny hun tu krdena style */}
       <button>Complete</button>
+      
+      </>
+      }
+
     </div>
   );
 };

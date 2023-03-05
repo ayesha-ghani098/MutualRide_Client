@@ -29,7 +29,8 @@ const RideCard = (props) => {
     costPerKm,
     source,
     destination,
-    date
+    date,
+    fare
   } = props.request;
   const navigate = useNavigate();
 
@@ -81,7 +82,7 @@ const RideCard = (props) => {
             <img src={Time} alt="icon" /> Time: {startTime}
           </div>
           <div>
-            <img src={Money} alt="icon" /> {costPerKm}
+            <img src={Money} alt="icon" /> {fare}
           </div>
         </div>
         <div className={styles.buttonContainer}>

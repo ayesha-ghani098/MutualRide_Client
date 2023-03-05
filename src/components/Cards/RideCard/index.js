@@ -27,7 +27,7 @@ const RequestCard = (props) => {
     destination,
     fare,
     date} = props.ride;
-
+ console.log(props.ride)
   const navigate = useNavigate();
 
   const handleStart = () => {
