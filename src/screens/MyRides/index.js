@@ -17,7 +17,7 @@ const MyRides = () => {
       if(web3.isDriver)
       {
         let dataReq = await web3.rideSharingContractObj.methods.getRidesByRiderId(web3.user.riderId).call()
-
+                console.log(dataReq)
           const rides = await Promise.all(
             dataReq.map(async (i) => {
   
@@ -58,7 +58,7 @@ const MyRides = () => {
    },[web3.rideSharingContractObj])
   return (
     <Layout>
-        <Heading text="Completed Rides" />
+        <Heading text="My Rides" />
         <RidesList type="Rides" data={rides} />
       </Layout>
   )

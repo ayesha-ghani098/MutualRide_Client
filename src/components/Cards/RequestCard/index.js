@@ -30,24 +30,26 @@ const RideCard = (props) => {
     source,
     destination,
     date,
-    fare
+    fare,
+    rideId
   } = props.request;
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const web3 = useSelector((state) => state.web3);
+  console.log(props.request,web3)
 
-  const handleJoin = async () => {
-    // const tx = await web3.rideSharingContractObj.methods.joinRide(id,user.riderInfo.id)
-    // console.log(tx);
-    //joinRide(uint rideId, uint riderId)
+  const handleJoin = async (id) => {
+    const tx = await web3.rideSharingContractObj.methods.joinRide(id,web3.user.riderinfo.id).send({from:web3.wallet.address})
+    console.log(tx);
+    // joinRide(uint rideId, uint riderId)
     // TODO DEKHLENA JAHAN NAVIGATE KRNA HU
-    navigate({
-      pathname: "/passenger/request-ride",
+   if(tx) {navigate({
+      pathname: "/passenger/my-rides",
       search: createSearchParams({
         rideId: id,
       }).toString(),
-    });
+    });}
   };
 
   return (
@@ -86,7 +88,7 @@ const RideCard = (props) => {
           </div>
         </div>
         <div className={styles.buttonContainer}>
-          <TextButton text="Join the ride" onClick={handleJoin} />
+          <TextButton text="Join the ride" onClick={()=>handleJoin(rideId)} />
         </div>
       </div>
     </div>
