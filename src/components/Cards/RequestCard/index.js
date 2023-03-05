@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
+import { ref, set,onValue,update } from "firebase/database";
+import { db } from "../../../firebase/firebaseIns";
 import { createSearchParams, useNavigate } from "react-router-dom";
 
 // Styles and Assets
@@ -11,6 +13,7 @@ import Source from "../../../assets/source.png";
 import Destination from "../../../assets/destination.png";
 import Message from "../../../assets/message.png";
 import Whatsapp from "../../../assets/whatsapp.png";
+import { getLocation } from "../../../utils/geoLocation";
 
 // Components
 import { TextButton } from "../../Buttons";
@@ -37,20 +40,62 @@ const RideCard = (props) => {
 
   const dispatch = useDispatch();
   const web3 = useSelector((state) => state.web3);
+  const [mylocation,setMylocation] = useState({});
   console.log(props.request,web3)
 
   const handleJoin = async (id) => {
-    const tx = await web3.rideSharingContractObj.methods.joinRide(id,web3.user.riderinfo.id).send({from:web3.wallet.address})
-    console.log(tx);
+    const a = await getLocation(setMylocation);
+    await getLocation(setMylocation);
+   console.log(mylocation)
+    // const tx = await web3.rideSharingContractObj.methods.joinRide(id,web3.user.riderinfo.id).send({from:web3.wallet.address})
+    // console.log(tx);
     // joinRide(uint rideId, uint riderId)
     // TODO DEKHLENA JAHAN NAVIGATE KRNA HU
-   if(tx) {navigate({
+   if(true) {
+    setUserLocation(web3.wallet.address);
+    setRide(id)
+    navigate({
       pathname: "/passenger/my-rides",
       search: createSearchParams({
-        rideId: id,
+        riderId: web3.user.riderinfo.id,
       }).toString(),
     });}
   };
+
+  const setUserLocation = async ( id) => {
+   
+
+   
+    const datax={
+      location: mylocation,
+      cell: web3.user.riderinfo.mobileNo
+      
+    }
+    console.log(id,datax)
+    set(ref(db, "users/" + id), datax)
+      .then(() => {
+        console.log("successfully done");
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  };
+  const setRide = async ( id) => {
+    const datax={
+     rider:web3.wallet.address           
+   }
+   console.log(id,datax)
+   update(ref(db, "rides/" + id), datax)
+
+     .then(() => {
+       console.log("successfully done");
+     })
+     .catch((err) => {
+       console.log("err", err);
+     });
+ };
+
+
 
   return (
     <div className={styles.card}>

@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import { ref, set,onValue } from "firebase/database";
+import { ref, set,onValue,update } from "firebase/database";
 import { db } from "../../../firebase/firebaseIns";
 
 // Components
@@ -7,14 +7,14 @@ import AlertMessage from "../../../components/Alert";
 import DriverMap from "../../../components/SharedRideScreen/DriverScreen";
 import { getLocation } from "../../../utils/geoLocation";
 
-const DriverTracking = ({showAlert,myId,otherId}) => {
+const DriverTracking = ({showAlert,myId,otherId,isDriver}) => {
   const [status, setStatus] = useState();
   const [mylocation,setmyLocation]=useState({
     "lat": 24.9644782,
-    "lng": 67.0715994
+    "lng": 67.0167
 })
   const [otherlocation,setOtherLocation]=useState({
-    "lat": 24.9644782,
+    "lat": 24.8532,
     "lng": 67.0715994
 })
 
@@ -37,7 +37,7 @@ const DriverTracking = ({showAlert,myId,otherId}) => {
 
 
     console.log('This function will run every 5 seconds');
-      }, 20000);
+      }, 40000);
       return () => clearInterval(interval);
     }, []);
    
@@ -45,11 +45,10 @@ const DriverTracking = ({showAlert,myId,otherId}) => {
 
     const sendMessage = ( id) => {
       console.log(mylocation)
-      set(ref(db, "users/" + id), {
+      update(ref(db, "users/" + id), {
         location: mylocation
-        ,
       })
-        .then(() => {
+      .then(() => {
           console.log("successfully done");
         })
         .catch((err) => {
@@ -81,7 +80,7 @@ const DriverTracking = ({showAlert,myId,otherId}) => {
         <>
               <DriverMap source={mylocation} destination={otherlocation} />
       {/* button change krny hun tu krdena style */}
-      <button>Complete</button>
+    {isDriver &&  <button>Complete</button>}
       
       </>
       }

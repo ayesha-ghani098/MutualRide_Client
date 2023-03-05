@@ -9,8 +9,8 @@ export function getLocation(setLocation) {
 }
 
 function getCurrentLocation(setLocation) {
- let data2=null
  navigator.geolocation.getCurrentPosition((result)=> {
+  console.log(result)
     setLocation({lat:  result.coords.latitude, // latitude value
     lng: result.coords.longitude} )// longitude value
   
