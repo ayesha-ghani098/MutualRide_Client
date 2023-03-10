@@ -14,7 +14,7 @@ const MyRides = () => {
    useEffect(()=>{
     async function fetch(){
     
-      if(web3.isDriver)
+      if(web3.isRider)
       {
         let dataReq = await web3.rideSharingContractObj.methods.getRidesByRiderId(web3.user.riderId).call()
                 console.log(dataReq)
