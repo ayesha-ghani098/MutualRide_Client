@@ -7,6 +7,7 @@ import Layout from "../../../components/Container";
 import { Heading } from "../../../components/Text";
 import { useNavigate } from "react-router-dom";
 import { ref, set, onValue } from "firebase/database";
+import { db } from "../../../firebase/firebaseIns";
 
 const PassengerHome = () => {
   const web3 = useSelector((state) => state.web3);

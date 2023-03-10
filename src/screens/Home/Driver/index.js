@@ -15,7 +15,6 @@ import AlertMessage from "../../../components/Alert";
 import { mockDataRide } from "../../../utils/data";
 import { db } from "../../../firebase/firebaseIns";
 import { useSelector } from "react-redux";
-import AlertMessage from "../../../components/Alert";
 
 const DriverHome = () => {
   const navigate = useNavigate();
@@ -23,11 +22,17 @@ const DriverHome = () => {
   const [myRides, setRides] = useState([]);
   const [driver,setDriver] = useState([]);
   const [rider,setRider] = useState([]);
+  const [rideId,setRideId] = useState(null)
  const [showPopup, setPopup] = useState(false)
   const handleNavigation = () => {
     navigate("/driver/add-ride");
   };
-  let driverComp=null
+const handlePopupRender=()=>{
+    setPopup(false)
+
+  navigate(`/driver/tracking/${driver}/${rider}/${rideId}`)
+
+}
   const checkIfAnyRideRunning=(rides)=>{
   
     const messagesRef = ref(db, 'rides/');
@@ -40,12 +45,13 @@ const DriverHome = () => {
         messageList.push(childData);
       });
       console.log(messageList)
-      messageList.forEach(e=>{
+      messageList.forEach((e,i)=>{
+        console.log(e,i)
        if((e.driver==web3.wallet.address) && e.status=="running"){
         setRider(e.rider)
         setDriver(e.driver)
+        setRideId(i)
         setPopup(true)
-        console.log(driverComp)
        }
 
       })
@@ -106,8 +112,11 @@ const DriverHome = () => {
     <>
      
       <Layout>
-      {(driver && rider) &&  (<DriverTracking render={false} myId={driver} otherId={rider} isDriver={true}/>)}
-      {showPopup && <AlertMessage message={"Your ride is running Click here!"}/>}
+      {(driver && rider && showPopup) &&  (<DriverTracking render={false} isDriver={true} myId={driver} otherId={rider}/>)}
+      {showPopup && 
+(   <div onClick={handlePopupRender}>   <AlertMessage message={"Your ride is running Click here!"}/>
+</div>
+)      }
         <div className={styles.addRide}>
           <Text text="Get started with just one click add a ride now!" />
         </div>
