@@ -38,7 +38,7 @@ const RegisterDriver = () => {
       navigate("/register-driver")
      }
      else  if(web3.user.isDriver){
-        navigate("/Driver")
+        navigate("/driver")
       }
     },[web3.user])
   const onSubmit = async (values, event) => {

@@ -22,7 +22,7 @@ const RegisterPassenger = () => {
   useEffect(()=>{
 
     if(web3.user.isPassenger){
-      navigate("/Passenger")
+      navigate("/passenger")
     }
   },[])
 
