@@ -80,7 +80,7 @@ const connectSuccess = (payload) => {
         user.driverinfo={name:tx.name, nic:tx.nic,email:tx.email, mobileNo: tx.cellno, vehicle:{
           model: tx.car.modelName, regNum:tx.car.regNum
          },
-         id: tx.id,
+         id: tx.Id,
         }
 
         }
@@ -173,7 +173,6 @@ export const registerDriver=(contract,address,data)=>{
       const tx = await contract.methods.registerForDriver(data.name,data.cnic,data.email,data.phoneno,data.regno, data.model,data.licenceNo).send({from:address});
       console.log(tx)
       
-      window.location.reload();
       const sendMessage = ( id) => {
         set(ref(db, "users/" + id), {
           location: "",
@@ -189,6 +188,8 @@ export const registerDriver=(contract,address,data)=>{
       };
        
       sendMessage(address)
+      window.location.reload();
+
       dispatch(registerDriverSuccess({driverId:tx.events.registered.returnValues.driverId}))
    }catch(err){
        console.log(err)
