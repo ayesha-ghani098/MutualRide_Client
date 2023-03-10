@@ -72,13 +72,13 @@ const RequestCard = (props) => {
 
         <div className={styles.cardBottom}>
           <div>
-            <img src={Date} alt="icon" /> date: {date}
+            <img src={Date} alt="icon" />{date}
           </div>
           <div>
-            <img src={Time} alt="icon" /> Time: {startTime}
+            <img src={Time} alt="icon" />{startTime}
           </div>
           <div>
-            <img src={Money} alt="icon" /> Fare: {fare}
+            <img src={Money} alt="icon" />{fare}
           </div>
           <div className={styles.buttonContainer}>
           <TextButton text="Start Ride" onClick={()=>handleStart(id)} />
