@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import RidesList from "../../../components/List/RidesList";
 import Layout from "../../../components/Container";
 import { Heading } from "../../../components/Text";
-import { Heading2 } from "../../../components/Text/Heading";
 
 const PassengerHome = () => {
   const web3 = useSelector((state) => state.web3);
@@ -22,8 +21,6 @@ const PassengerHome = () => {
         console.log(dataReq);
         const rides = await Promise.all(
           dataReq.map(async (i) => {
-
-
             let locArr = i.location.split("_");
             let timeArr = i.StartTime.split("_");
             console.log(locArr);
@@ -42,9 +39,9 @@ const PassengerHome = () => {
               image: "",
               name: "Ayesha Ghani",
               rideId: i.rideId,
-              fare:i.fair,
-              isPayed:false,
-              state:i.currState
+              fare: i.fair,
+              isPayed: false,
+              state: i.currState,
             };
             return ride;
           })
@@ -69,9 +66,20 @@ const PassengerHome = () => {
     <>
       <Layout>
         <Heading text="Nearby Rides" />
+
         {data.length !== 0 ? (
           <div>
             <input
+              style={{
+                borderRadius: "4px",
+                width: "100%",
+                padding: "10px",
+                background: "#4BA7E1",
+                border: "none",
+                margin: "15px 0",
+                color: "white",
+                outline: "none",
+              }}
               type="text"
               placeholder="Search..."
               onChange={handleSearch}
@@ -79,9 +87,7 @@ const PassengerHome = () => {
             <RidesList type="Requests" data={displayItems} />
           </div>
         ) : (
-          <div>
-            <Heading2 text="Sorry! No Rides Available" />
-          </div>
+          <div>Sorry! No Rides Available</div>
         )}
       </Layout>
     </>
