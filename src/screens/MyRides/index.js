@@ -59,7 +59,7 @@ const MyRides = () => {
   return (
     <Layout>
         <Heading text="My Rides" />
-        <RidesList type="Rides" data={rides} />
+        <RidesList data={rides} />
       </Layout>
   )
 }

@@ -77,7 +77,7 @@ const RideCard = (props) => {
           </div>
         </div>
         <div className={styles.buttonContainer}>
-          <TextButton text="Completed" disabled={true} />
+          <TextButton text="Pay Fare" disabled={true} />
         </div>
       </div>
     </div>
