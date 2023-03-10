@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ref, set,onValue } from "firebase/database";
+import { ref, set, onValue } from "firebase/database";
 
 // Styles
 import styles from "./driver.module.css";
@@ -17,55 +17,56 @@ import { useSelector } from "react-redux";
 
 const DriverHome = () => {
   const navigate = useNavigate();
- const web3 = useSelector (state=>state.web3)
- const [myRides,setRides] =useState([]);
+  const web3 = useSelector(state => state.web3)
+  const [myRides, setRides] = useState([]);
   const handleNavigation = () => {
     navigate("/driver/add-ride");
   };
 
-  useEffect(()=>{
-    async function fetch(){
-      console.log("from driver home fethc",web3)
-      if(web3.isDriver)
-      {let dataReq = await web3.rideSharingContractObj.methods.getRidesByDriverId(web3.user.driverId).call()
+  useEffect(() => {
+    async function fetch() {
+      console.log("from driver home fethc", web3)
+      if (web3.isDriver) {
+        console.log(web3.user.driverId)
+        let dataReq = await web3.rideSharingContractObj.methods.getRidesByDriverId(web3.user.driverId).call()
 
-          const rides = await Promise.all(
-            dataReq.map(async (i) => {
-  
-  
-              let locArr = i.location.split("_");
-              let timeArr = i.StartTime.split("_");
-              console.log(locArr);
-              const ride = {
-                id: i.rideId,
-                address: i.creator,
-                startTime: timeArr[1],
-                date: timeArr[0],
-                requiredSeats: i.seats,
-                sourceLong: i.sourceLong,
-                sourceLat: i.sourceLat,
-                destLong: i.destLong,
-                destLat: i.destLat,
-                source: locArr[1],
-                destination: locArr[2],
-                image: "",
-                name: "Ayesha Ghani",
-                rideId: i.rideId,
-                fare:i.fair,
-                isPayed:false,
-                state:i.currState
-              };
-              return ride;
-            })
-          );
-           console.log(rides)
-          setRides(rides);
-        }
+        const rides = await Promise.all(
+          dataReq.map(async (i) => {
 
-     }
-    
+
+            let locArr = i.location.split("_");
+            let timeArr = i.StartTime.split("_");
+            console.log(locArr);
+            const ride = {
+              id: i.rideId,
+              address: i.creator,
+              startTime: timeArr[1],
+              date: timeArr[0],
+              requiredSeats: i.seats,
+              sourceLong: i.sourceLong,
+              sourceLat: i.sourceLat,
+              destLong: i.destLong,
+              destLat: i.destLat,
+              source: locArr[1],
+              destination: locArr[2],
+              image: "",
+              name: "Ayesha Ghani",
+              rideId: i.rideId,
+              fare: i.fair,
+              isPayed: false,
+              state: i.currState
+            };
+            return ride;
+          })
+        );
+        console.log(rides)
+        setRides(rides);
+      }
+
+    }
+
     fetch()
-  },[web3])
+  }, [web3.isDriver])
 
 
   return (

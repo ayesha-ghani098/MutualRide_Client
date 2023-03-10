@@ -20,6 +20,9 @@ import { TextButton } from "../../Buttons";
 import { useDispatch, useSelector } from "react-redux";
 
 const RideCard = (props) => {
+
+ 
+
   const {
     id,
     name,
@@ -47,8 +50,8 @@ const RideCard = (props) => {
     const a = await getLocation(setMylocation);
     await getLocation(setMylocation);
    console.log(mylocation)
-    // const tx = await web3.rideSharingContractObj.methods.joinRide(id,web3.user.riderinfo.id).send({from:web3.wallet.address})
-    // console.log(tx);
+    const tx = await web3.rideSharingContractObj.methods.joinRide(id,web3.user.riderinfo.id).send({from:web3.wallet.address})
+    console.log(tx);
     // joinRide(uint rideId, uint riderId)
     // TODO DEKHLENA JAHAN NAVIGATE KRNA HU
    if(true) {
@@ -61,7 +64,24 @@ const RideCard = (props) => {
       }).toString(),
     });}
   };
+ 
+  const getMessages =  (id) => {
+  
+    const messagesRef = ref(db, 'users/'+id);
 
+    // Fetch the data
+    onValue(messagesRef, (snapshot) => {
+      const messageList = [];
+      snapshot.forEach((childSnapshot) => {
+        const childData = childSnapshot.val();
+        messageList.push(childData);
+      });
+      console.log(messageList[0])
+      //setWhatsAppno(messageList[0])
+      if(messageList)
+      return messageList[0]
+    });
+  };
   const setUserLocation = async ( id) => {
    
 
@@ -94,7 +114,15 @@ const RideCard = (props) => {
        console.log("err", err);
      });
  };
-
+ const handleClickWhatsApp = async () => {
+  const mobileNumber =  await getMessages("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266");
+  // Replace with the desired mobile number
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent);
+  const url = isMobile
+    ? `whatsapp://send?phone=${mobileNumber}`
+    : `https://web.whatsapp.com/send?phone=${mobileNumber}`;
+  window.open(url);
+};
 
 
   return (
@@ -108,7 +136,7 @@ const RideCard = (props) => {
         <div className={styles.info}>
           <h5>{name}</h5>
           <div>
-          <img className={styles.whatsapp} src={Whatsapp} alt="icon" />
+          <img className={styles.whatsapp} onClick={handleClickWhatsApp} src={Whatsapp} alt="icon" />
           <img  className={styles.message} src={Message} alt="icon" /></div>
         </div>
 

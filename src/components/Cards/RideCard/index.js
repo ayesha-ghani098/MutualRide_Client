@@ -9,7 +9,8 @@ import Date from "../../../assets/calendar.png";
 import Money from "../../../assets/money.png";
 import Source from "../../../assets/source.png";
 import Destination from "../../../assets/destination.png";
-
+import { ref, set,onValue,update } from "firebase/database";
+import { db } from "../../../firebase/firebaseIns";
 // Components
 import { TextButton } from "../../Buttons";
 
@@ -26,12 +27,27 @@ const RequestCard = (props) => {
     source,
     destination,
     fare,
+    rideId,
     date} = props.ride;
  console.log(props.ride)
   const navigate = useNavigate();
+  const setStatus = async ( id) => {
+    const datax={
+     status:"pending"         
+   }
+   console.log(id,datax)
+   update(ref(db, "rides/" + id), datax)
 
-  const handleStart = () => {
+     .then(() => {
+       console.log("successfully done");
+     })
+     .catch((err) => {
+       console.log("err", err);
+     });
+ };
+  const handleStart = (id) => {
     // navigate to tracking
+    setStatus(id)
   };
 
   return (
@@ -65,6 +81,9 @@ const RequestCard = (props) => {
           <div>
             <img src={Money} alt="icon" /> Fare: {fare}
           </div>
+          <div className={styles.buttonContainer}>
+          <TextButton text="Start Ride" onClick={()=>handleStart(id)} />
+        </div>
         </div>
 
       </div>
