@@ -135,21 +135,7 @@ const connectSuccess = (payload) => {
 
   }
   console.log(user)
-  const sendMessage = ( id) => {
-    set(ref(db, "users/" + id), {
-      location: "",
-      cell:user.driverinfo.mobileNo,
-      
-    })
-    .then(() => {
-        console.log("successfully done");
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
-  };
-   
-  sendMessage(wallet.address)
+
 
     dispatch( 
       connectSuccess({  
@@ -188,6 +174,21 @@ export const registerDriver=(contract,address,data)=>{
       console.log(tx)
       
       window.location.reload();
+      const sendMessage = ( id) => {
+        set(ref(db, "users/" + id), {
+          location: "",
+          cell:data.phoneno,
+          
+        })
+        .then(() => {
+            console.log("successfully done");
+          })
+          .catch((err) => {
+            console.log("err", err);
+          });
+      };
+       
+      sendMessage(address)
       dispatch(registerDriverSuccess({driverId:tx.events.registered.returnValues.driverId}))
    }catch(err){
        console.log(err)
