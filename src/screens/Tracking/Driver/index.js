@@ -7,7 +7,7 @@ import AlertMessage from "../../../components/Alert";
 import DriverMap from "../../../components/SharedRideScreen/DriverScreen";
 import { getLocation } from "../../../utils/geoLocation";
 
-const DriverTracking = ({showAlert,myId,otherId,isDriver}) => {
+const DriverTracking = ({render,myId,otherId,isDriver}) => {
   const [status, setStatus] = useState();
   const [mylocation,setmyLocation]=useState({
     "lat": 24.9644782,
@@ -76,14 +76,12 @@ const DriverTracking = ({showAlert,myId,otherId,isDriver}) => {
   return (
     <div>
 
-      {showAlert? <AlertMessage message={status} />:
         <>
-              <DriverMap source={mylocation} destination={otherlocation} />
-      {/* button change krny hun tu krdena style */}
-    {isDriver &&  <button>Complete</button>}
+{    render && <DriverMap source={mylocation} destination={otherlocation} />}
+   {isDriver && render &&  <button>Complete</button>}
       
       </>
-      }
+      
 
     </div>
   );
