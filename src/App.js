@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import AlertMessage from "./components/Alert/index"
+
 // Web3
 import Web3 from "web3";
 
@@ -11,6 +11,8 @@ import { connectWeb3 } from "./redux/web3/actions";
 // Routes
 import AppRoutes from "./route/AppRoutes/appRoutes";
 
+// Components 
+import AlertMessage from "./components/Alert/index"
 const App = () => {
 
   const web3 = useSelector(state=>state.web3)
