@@ -29,15 +29,14 @@ const RequestCard = (props) => {
     fare,
     rideId,
     date} = props.ride;
- console.log(props.ride)
+
   const navigate = useNavigate();
-  const setStatus = async ( id) => {
+  const setStatus = async (id) => {
     const datax={
-     status:"pending"         
+     status:"running"         
    }
    console.log(id,datax)
    update(ref(db, "rides/" + id), datax)
-
      .then(() => {
        console.log("successfully done");
      })

@@ -20,19 +20,18 @@ const RideCard = (props) => {
     id,
     name,
     image,
-    sourceLat,
-    sourceLong,
-    destLong,
-    destLat,
-    startTime,
-    costPerKm,
+    source,
+    destination,
+   fare,
+   startTime,
+   date,
   } = props.data;
+
+  console.log("my rides prop",props)
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-  const web3 = useSelector((state) => state.web3);
 
-  const handleJoin = async () => {
+  const payFare = async () => {
     // const tx = await web3.rideSharingContractObj.methods.joinRide(id,user.riderInfo.id)
     // console.log(tx);
     //joinRide(uint rideId, uint riderId)
@@ -58,26 +57,26 @@ const RideCard = (props) => {
         </div>
         <div className={styles.location}>
           <p>
-            <img src={Source} alt="icon" /> source
+            <img src={Source} alt="icon" /> {source}
           </p>
           <p>
             <img src={Destination} alt="icon" />
-            destination{" "}
+            {destination}
           </p>
         </div>
         <div className={styles.cardBottom}>
           <div>
-            <img src={Date} alt="icon" /> date{" "}
+            <img src={Date} alt="icon" /> {date}
           </div>
           <div>
-            <img src={Time} alt="icon" /> Time
+            <img src={Time} alt="icon" /> {startTime}
           </div>
           <div>
-            <img src={Money} alt="icon" /> {costPerKm}
+            <img src={Money} alt="icon" /> {fare}
           </div>
         </div>
         <div className={styles.buttonContainer}>
-          <TextButton text="Pay Fare" disabled={true} />
+          <TextButton text="Pay Fare" disabled={true} onClick={payFare} />
         </div>
       </div>
     </div>

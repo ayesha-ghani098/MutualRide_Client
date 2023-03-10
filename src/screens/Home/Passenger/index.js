@@ -18,7 +18,7 @@ const PassengerHome = () => {
         let dataReq = await web3.rideSharingContractObj.methods
           .getAllRides()
           .call();
-        console.log(dataReq);
+        console.log("nearby rides from blockchain",dataReq);
         const rides = await Promise.all(
           dataReq.map(async (i) => {
             let locArr = i.location.split("_");
@@ -46,7 +46,7 @@ const PassengerHome = () => {
             return ride;
           }).filter(i=>i.state!==0)
         );
-        console.log(rides)
+        console.log("Passenger nearby rides list ",rides)
         setData(rides);
       }
     }

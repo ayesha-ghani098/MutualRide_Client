@@ -1,7 +1,7 @@
 import React from "react";
 import { RequestCard, RideCard,MyRideCard } from "../../Cards";
 const RidesList = ({ data, type }) => {
-  console.log(data)
+  console.log("list",data)
 
   return (
     <div style={{display:"flex",flexWrap:"wrap"}}>
