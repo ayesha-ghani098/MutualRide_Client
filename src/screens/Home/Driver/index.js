@@ -15,7 +15,6 @@ import AlertMessage from "../../../components/Alert";
 import { mockDataRide } from "../../../utils/data";
 import { db } from "../../../firebase/firebaseIns";
 import { useSelector } from "react-redux";
-import AlertMessage from "../../../components/Alert";
 
 const DriverHome = () => {
   const navigate = useNavigate();
