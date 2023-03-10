@@ -1,0 +1,8 @@
+.alertMessage{
+    padding: 15px 30px;
+    background-color: #c3edf5;
+    color: rgb(38, 114, 201);
+    text-align: left;
+    border-radius: 10px;
+    
+}
