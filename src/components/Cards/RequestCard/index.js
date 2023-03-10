@@ -109,15 +109,13 @@ const RideCard = (props) => {
   const handleClickWhatsApp = async () => {
     let id = address;
     try {
-      const phoneNumber = await getPhoneNumber(id);
-      console.log(phoneNumber);
-      if (phoneNumber) {
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(
-          window.navigator.userAgent
-        );
-        const url = isMobile
-          ? `whatsapp://send?phone=${phoneNumber}`
-          : `https://wa.me/${phoneNumber}`;
+      const mobileNumber = await getPhoneNumber(id);
+      console.log(mobileNumber);
+      if (mobileNumber) {
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent);
+    const url = isMobile
+      ? `whatsapp://send?phone=${mobileNumber}`
+      : `https://web.whatsapp.com/send?phone=${mobileNumber}`;
         window.open(url);
       } else {
         console.log("No phone number found");
