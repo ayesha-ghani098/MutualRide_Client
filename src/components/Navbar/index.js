@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Nav, Navbar, Form } from "react-bootstrap";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./navbar.module.css";
 
 const NavBar = ({ handleShow }) => {
+  const web3 = useSelector((state) => state.web3);
   let navigate = useNavigate();
   let params = window.location.pathname.split("/");
 
@@ -14,7 +16,13 @@ const NavBar = ({ handleShow }) => {
     params[1] === "driver" ? "Switch to Passenger" : "Switch to Driver";
 
   const handleProfileSwitch = () => {
-    if (params[1] === "passenger") {
+    if (!web3.user.isRider) {
+      navigate("/register-passenger");
+    }
+    else if (!web3.user.isDriver) {
+      navigate("/register-driver");
+    }
+    else if (params[1] === "passenger") {
       navigate("/driver");
     } else {
       navigate("/passenger");
