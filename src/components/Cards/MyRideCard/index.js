@@ -1,6 +1,5 @@
 import React from "react";
-import { createSearchParams, useNavigate} from "react-router-dom";
-
+import { createSearchParams, useNavigate } from "react-router-dom";
 
 // Styles and Assets
 import styles from "../RideCard.module.css";
@@ -13,23 +12,13 @@ import Destination from "../../../assets/destination.png";
 
 // Components
 import { TextButton } from "../../Buttons";
-import { useDispatch, useSelector } from "react-redux";
 
 const RideCard = (props) => {
-  const {
-    id,
-    name,
-    image,
-    source,
-    destination,
-   fare,
-   startTime,
-   date,
-  } = props.data;
+  const { id, name, image, source, destination, fare, startTime, date } =
+    props.data;
 
-  console.log("my rides prop",props)
+  console.log("my rides prop", props);
   const navigate = useNavigate();
-
 
   const payFare = async () => {
     // const tx = await web3.rideSharingContractObj.methods.joinRide(id,user.riderInfo.id)

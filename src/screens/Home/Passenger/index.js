@@ -59,7 +59,7 @@ const PassengerHome = () => {
   };
 
   const regex = new RegExp(`\\b${searchTerm}`, "i");
-  const filteredItems = data.filter((item) => item? regex.test(item.location):false);
+  const filteredItems = data.filter((item) => item? regex.test(item.source+" "+item.destination):false);
 
   const displayItems = searchTerm.length === 0 ? data : filteredItems;
 

@@ -10,6 +10,7 @@ import { TextButton } from "../../../components/Buttons";
 import RidesList from "../../../components/List/RidesList";
 import Layout from "../../../components/Container";
 import { Heading, Text } from "../../../components/Text";
+import AlertMessage from "../../../components/Alert";
 
 import { mockDataRide } from "../../../utils/data";
 import { db } from "../../../firebase/firebaseIns";

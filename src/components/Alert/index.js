@@ -1,8 +1,9 @@
 import React from "react";
-import { Alert } from "bootstrap";
+
+import styles from "./alert.module.css";
 
 const AlertMessage = ({ message }) => {
-  return <Alert variant="primary">{message}</Alert>;
+  return <div className={styles.alertMessage}>{message}</div>;
 };
 
 export default AlertMessage;
