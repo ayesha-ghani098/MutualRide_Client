@@ -56,6 +56,10 @@ const handlePopupRender=()=>{
     });
   
 }
+
+useEffect(()=>{
+  checkIfAnyRideRunning(myRides)
+},[myRides])
   useEffect(() => {
     async function fetchRides() {
       if (web3.rideSharingContractObj) {

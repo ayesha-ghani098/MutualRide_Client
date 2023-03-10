@@ -12,8 +12,12 @@ import Destination from "../../../assets/destination.png";
 
 // Components
 import { TextButton } from "../../Buttons";
+import { useSelector } from "react-redux";
+import Web3 from "../../../utils/web3";
 
 const RideCard = (props) => {
+  const web3 = useSelector((state) => state.web3);
+
   const { id, name, image, source, destination, fare, startTime, date } =
     props.data;
 
@@ -21,8 +25,13 @@ const RideCard = (props) => {
   const navigate = useNavigate();
 
   const payFare = async () => {
-    // const tx = await web3.rideSharingContractObj.methods.joinRide(id,user.riderInfo.id)
-    // console.log(tx);
+    const options = {
+      from: web3.wallet.address,
+      value: Web3.utils.toWei(String(300000), 'gwei'),
+      gasLimit: 3000000, // adjust gas limit as per your requirement
+    };
+    const tx = await web3.rideSharingContractObj.methods.payForRide(id).send(options);
+    console.log(tx);
     //joinRide(uint rideId, uint riderId)
     // TODO DEKHLENA JAHAN NAVIGATE KRNA HU
     navigate({
@@ -65,7 +74,7 @@ const RideCard = (props) => {
           </div>
         </div>
         <div className={styles.buttonContainer}>
-          <TextButton text="Pay Fare" disabled={true} onClick={payFare} />
+          <TextButton text="Pay Fare" onClick={payFare} />
         </div>
       </div>
     </div>

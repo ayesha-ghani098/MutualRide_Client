@@ -101,10 +101,10 @@ const AppRoutes = ({ web3 }) => {
             }
           />
           <Route
-            path="tracking"
+            path="tracking/:driver/:rider/:id"
             element={
-              <Protected isSignedIn={web3.anyRideInRunning}>
-                <PassengerTracking />
+              <Protected isSignedIn={true}>
+                <DriverTracking render={true} isDriver={false} myId={null} otherId={null}/>
               </Protected>
             }
           />

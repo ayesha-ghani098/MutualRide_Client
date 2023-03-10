@@ -56,7 +56,7 @@ const DriverTracking = (props) => {
 
 
     console.log('This function will run every 5 seconds');
-      }, 40000);
+      }, 5000);
       return () => clearInterval(interval);
     }, []);
    
