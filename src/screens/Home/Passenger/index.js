@@ -5,13 +5,54 @@ import { useSelector } from "react-redux";
 import RidesList from "../../../components/List/RidesList";
 import Layout from "../../../components/Container";
 import { Heading } from "../../../components/Text";
+import { useNavigate } from "react-router-dom";
+import { ref, set, onValue } from "firebase/database";
 
 const PassengerHome = () => {
   const web3 = useSelector((state) => state.web3);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState([]);
+  const navigate = useNavigate ();
+  const [myRides, setRides] = useState([]);
+  const [driver,setDriver] = useState([]);
+  const [rider,setRider] = useState([]);
+  const [rideId,setRideId] = useState(null)
+ const [showPopup, setPopup] = useState(false)
+  const handleNavigation = () => {
+    navigate("/driver/add-ride");
+  };
+const handlePopupRender=()=>{
+    setPopup(false)
 
+  navigate(`/driver/tracking/${driver}/${rider}/${rideId}`)
+
+}
+  const checkIfAnyRideRunning=(rides)=>{
+  
+    const messagesRef = ref(db, 'rides/');
+    
+    // Fetch the data
+    onValue(messagesRef, (snapshot) => {
+      const messageList = [];
+      snapshot.forEach((childSnapshot) => {
+        const childData = childSnapshot.val();
+        messageList.push(childData);
+      });
+      console.log(messageList)
+      messageList.forEach((e,i)=>{
+        console.log(e,i)
+       if((e.driver==web3.wallet.address) && e.status=="running"){
+        setRider(e.rider)
+        setDriver(e.driver)
+        setRideId(i)
+        setPopup(true)
+       }
+
+      })
+    });
+  
+}
   useEffect(() => {
     async function fetchRides() {
       if (web3.rideSharingContractObj) {
