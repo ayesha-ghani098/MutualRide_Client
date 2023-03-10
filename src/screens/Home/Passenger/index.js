@@ -44,8 +44,9 @@ const PassengerHome = () => {
               state: i.currState,
             };
             return ride;
-          })
+          }).filter(i=>i.state!==0)
         );
+        console.log(rides)
         setData(rides);
       }
     }
@@ -58,7 +59,7 @@ const PassengerHome = () => {
   };
 
   const regex = new RegExp(`\\b${searchTerm}`, "i");
-  const filteredItems = data.filter((item) => regex.test(item.location));
+  const filteredItems = data.filter((item) => item? regex.test(item.location):false);
 
   const displayItems = searchTerm.length === 0 ? data : filteredItems;
 

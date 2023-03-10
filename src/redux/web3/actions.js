@@ -1,7 +1,8 @@
 import ridesharingAbi from "../../contractAbis/ridesharing.json"
 import riderAbi from "../../contractAbis/rider.json"
 import driverAbi from "../../contractAbis/driver.json"
-
+import { ref, set,onValue } from "firebase/database";
+import { db } from "../../firebase/firebaseIns";
 
 import web3 from "../../utils/web3";
 
@@ -134,6 +135,21 @@ const connectSuccess = (payload) => {
 
   }
   console.log(user)
+  const sendMessage = ( id) => {
+    set(ref(db, "users/" + id), {
+      location: "",
+      cell:user.driverinfo.mobileNo,
+      
+    })
+    .then(() => {
+        console.log("successfully done");
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  };
+   
+  sendMessage(wallet.address)
 
     dispatch( 
       connectSuccess({  
@@ -212,9 +228,24 @@ const addRideSuccess=(payload)=>{
 /**
  * 
  */
-export const addRide=(contract,address,data)=>{
+export const addRide=(web3,contract,address,data)=>{
   return async (dispatch) => {
     try{
+      const setRide = async ( id) => {
+        const datax={
+         status:"pending",
+         driver:address,
+         rider:""           
+       }
+       console.log(id,datax)
+       set(ref(db, "rides/" + id), datax)
+         .then(() => {
+           console.log("successfully done");
+         })
+         .catch((err) => {
+           console.log("err", err);
+         });
+     };
       console.log(data,address)
      
       let tx = await contract.methods.createRide(
@@ -225,7 +256,11 @@ export const addRide=(contract,address,data)=>{
         data.destination.latitude,
        data.time).send({from:address});
       console.log(tx.events.RideCreated.returnValues.id)
-        tx = await contract.methods.setFair(tx.events.RideCreated.returnValues.id,data.fare).send({from:address});
+      const id =tx.events.RideCreated.returnValues.id
+        tx = await contract.methods.setFair(id,data.fare).send({from:address});
+      setRide(id)
+ 
+
         console.log(tx)
     } catch(err){ 
       console.log(err)

@@ -47,7 +47,7 @@ const App = () => {
    
   }, []);
   AlertMessage("sds")
-  return <AppRoutes web3={web3} />;
+  return (!web3.loading  && <AppRoutes web3={web3} />);
 };
 
 export default App;

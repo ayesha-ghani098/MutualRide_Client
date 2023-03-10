@@ -27,7 +27,7 @@ const RequestCard = (props) => {
     destination,
     fare,
     date} = props.ride;
-
+ console.log(props.ride)
   const navigate = useNavigate();
 
   const handleStart = () => {
@@ -66,9 +66,7 @@ const RequestCard = (props) => {
             <img src={Money} alt="icon" /> Fare: {fare}
           </div>
         </div>
-        <div className={styles.buttonContainer}>
-          <TextButton text="Start Ride" onClick={handleStart} />
-        </div>
+
       </div>
     </div>
   );
